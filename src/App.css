@@ -1,38 +1,118 @@
+* {
+  margin: 0;
+  box-sizing: border-box;
+}
+/* app */
 .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
+  line-height: 2;
+  color: #777;
+  font-family: 'Lato', sans-serif;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  letter-spacing: 0.05rem;
+}
+
+.nav_container {
+  margin: 2rem 2rem 0 2rem;
+  background-color: #444;
+  height: 5rem;
+  display: flex;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  justify-content: space-between;
 }
 
-.App-link {
-  color: #61dafb;
+.btn_all_tours {
+  margin-left: 3rem;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.btn_all_tours:hover {
+  transition: all 0.1s linear;
+  transform: translateY(-3px);
+  text-shadow: 0 1rem 2rem rgb(0, 0, 0);
+}
+.nav_el:hover {
+  transition: all 0.1s linear;
+  transform: translateY(-3px);
+  text-shadow: 0 1rem 2rem rgb(0, 0, 0);
+}
+#logo_img {
+  position: absolute;
+  left: 47%;
+  margin-left: auto;
+  margin-right: auto;
+  height: 2.2rem;
+}
+
+@media screen and (min-width: 725px) {
+  #nav_icon {
+    display: none;
   }
-  to {
-    transform: rotate(360deg);
+
+  .nav_links {
+    display: flex;
+    justify-content: space-between;
   }
+
+  .btn_signup {
+    padding: 1rem 1.7rem;
+    border: 1px #f7f7f7 solid;
+    border-radius: 3rem;
+    margin-right: 2rem;
+  }
+  .btn_signup:hover {
+    background: #f7f7f7;
+    color: #777;
+    transform: translateY(-3px);
+    text-shadow: 0 1rem 2rem rgb(0, 0, 0);
+  }
+}
+
+@media screen and (max-width: 724px) {
+  .hide_nav_links {
+    position: absolute;
+    top: 7rem;
+    left: 4rem;
+    right: 4rem;
+    margin-top: -300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* transition: all 0.5s linear; */
+  }
+  .show_nav_links {
+    position: absolute;
+    top: 7rem;
+    left: 4rem;
+    right: 4rem;
+    background-color: rgb(138, 133, 133);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: all 0.5s linear;
+  }
+}
+@media screen and (max-width: 450px) {
+  .btn_all_tours {
+    margin-left: 1rem;
+  }
+}
+#nav_icon {
+  font-size: 2rem;
+  color: #f7f7f7;
+  margin-left: auto;
+  margin-right: 1rem;
+}
+
+.nav_el {
+  list-style: none;
+  padding: 0.5rem;
+  margin-right: 1rem;
+}
+
+.nav_link {
+  text-decoration: none;
+  color: #f7f7f7;
+  text-transform: uppercase;
+  font-size: 0.95rem;
 }
