@@ -13,6 +13,7 @@
   letter-spacing: 0.05rem;
 }
 
+/* nav bar */
 .nav_container {
   margin: 2rem 2rem 0 2rem;
   background-color: #444;
@@ -102,6 +103,13 @@
   color: #f7f7f7;
   margin-left: auto;
   margin-right: 1rem;
+  cursor: pointer;
+}
+
+#nav_icon:hover {
+  transition: all 0.1s linear;
+  transform: translateY(-3px);
+  text-shadow: 0 1rem 2rem rgb(0, 0, 0);
 }
 
 .nav_el {
@@ -116,3 +124,5 @@
   text-transform: uppercase;
   font-size: 0.95rem;
 }
+
+/* all tours page */
