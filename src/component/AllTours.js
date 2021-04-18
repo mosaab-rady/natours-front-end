@@ -21,9 +21,22 @@ const AllTours = () => {
   }, []);
   // the rendered page
   return (
-    <div className='all_tours'>
+    <div className='tours_container'>
       {tours.map((tour, id) => (
-        <SingleTour key={id} img={tour.imageCover} name={tour.name} />
+        <SingleTour
+          key={id}
+          imageCover={tour.imageCover}
+          name={tour.name}
+          ratingsAverage={tour.ratingsAverage}
+          ratingsQuantity={tour.ratingsQuantity}
+          duration={tour.duration}
+          maxGroupSize={tour.maxGroupSize}
+          difficulty={tour.difficulty}
+          summary={tour.summary}
+          price={tour.price}
+          stops={tour.locations.length}
+          startLocation={tour.startLocation.description}
+        />
       ))}
     </div>
   );
