@@ -1,6 +1,12 @@
 import React from 'react';
+import { BiUser } from 'react-icons/bi';
+import { AiOutlineCalendar } from 'react-icons/ai';
+import { FiFlag, FiMapPin } from 'react-icons/fi';
+import { Link } from 'react-router-dom';
+// import axios from 'axios';
 
 export default function SingleTour({
+  id,
   imageCover,
   name,
   ratingsAverage,
@@ -12,18 +18,87 @@ export default function SingleTour({
   price,
   stops,
   startLocation,
+  startDate,
 }) {
+  // to get the month name and year
+  const date = new Date(startDate);
+  const monthNumber = date.getMonth();
+  const year = date.getUTCFullYear();
+  const monthNames = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+  ];
+  const month = monthNames[monthNumber];
+
   return (
     <div className='tour_container'>
-      <div className='img_container'>
-        <img
-          className='singleTour_img'
-          src={`http://localhost:5000/public/img/tours/${imageCover}`}
-          alt=''
-        />
+      {/* display the image cover and name of the tour */}
+      <div className='header_container'>
+        <div className='img_container'>
+          <img
+            className='singleTour_img'
+            src={`http://localhost:5000/public/img/tours/${imageCover}`}
+            alt={name}
+          />
+        </div>
+        <h3 className='singleTour_name'>
+          <span>{name}</span>
+        </h3>
       </div>
+      {/* for the over view details of the tour */}
       <div className='details_container'>
-        <h1>details</h1>
+        <h4>
+          {difficulty} {duration}-day tour
+        </h4>
+        <p>{summary}</p>
+        <div className='card_data'>
+          <div className='card_el'>
+            <FiMapPin className='card_el_img' />
+            <span>{startLocation}</span>
+          </div>
+          <div className='card_el'>
+            <AiOutlineCalendar className='card_el_img' />
+            <span>
+              {month} {year}
+            </span>
+          </div>
+          <div className='card_el'>
+            <FiFlag className='card_el_img' />
+            <span>{stops} stops</span>
+          </div>
+          <div className='card_el'>
+            <BiUser className='card_el_img' />
+            <span>{maxGroupSize} people</span>
+          </div>
+        </div>
+      </div>
+      {/* for the price and booking bottun */}
+      <div className='card_footer'>
+        <div className='footer_data'>
+          <div className='footer_data_el'>
+            <span className='footer_price'>${price}</span>
+            <span className='footer_data_el_detail'>per person</span>
+          </div>
+          <div className='footer_data_el'>
+            <span className='footer_price'>{ratingsAverage}</span>
+            <span className='footer_data_el_detail'>
+              rating({ratingsQuantity})
+            </span>
+          </div>
+        </div>
+        <Link to={`/tour/${id}`} className='nav_link details_link'>
+          details
+        </Link>
       </div>
     </div>
   );

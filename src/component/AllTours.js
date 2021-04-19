@@ -25,6 +25,7 @@ const AllTours = () => {
       {tours.map((tour, id) => (
         <SingleTour
           key={id}
+          id={tour.id}
           imageCover={tour.imageCover}
           name={tour.name}
           ratingsAverage={tour.ratingsAverage}
@@ -36,6 +37,7 @@ const AllTours = () => {
           price={tour.price}
           stops={tour.locations.length}
           startLocation={tour.startLocation.description}
+          startDate={tour.startDates[0]}
         />
       ))}
     </div>
