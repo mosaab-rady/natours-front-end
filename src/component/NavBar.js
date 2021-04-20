@@ -18,12 +18,20 @@ const NavBar = () => {
           }
         >
           <li className='nav_el'>
-            <Link to='/login' className='nav_link btn_login'>
+            <Link
+              to='/login'
+              className='nav_link btn_login'
+              onClick={() => setToggle(!toggle)}
+            >
               log in
             </Link>
           </li>
           <li className='nav_el'>
-            <Link to='/signup' className='nav_link btn_signup'>
+            <Link
+              to='/signup'
+              className='nav_link btn_signup'
+              onClick={() => setToggle(!toggle)}
+            >
               sign up
             </Link>
           </li>

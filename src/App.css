@@ -13,6 +13,7 @@
   flex-direction: column;
   align-items: center;
   letter-spacing: 0.08rem;
+  transition: all 0.3s linear;
 }
 
 /* nav bar */
@@ -138,7 +139,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   grid-template-rows: auto;
-  gap: 4.5rem;
+  gap: 4.2rem;
   /* display: flex;
   flex-wrap: wrap;
   gap: 5rem;
@@ -153,7 +154,7 @@
 .tour_container {
   height: auto;
   border-radius: 3px;
-  box-shadow: 0 1.5rem 4rem rgb(184, 181, 181);
+  box-shadow: 0 1.5rem 4rem rgb(223, 221, 221);
 }
 
 .header_container {
@@ -167,7 +168,7 @@
     rgba(91, 216, 72, 0.85),
     rgba(35, 204, 151, 0.85)
   );
-  clip-path: polygon(0 0, 100% 0, 100% 80%, 0 95%);
+  clip-path: polygon(0 0, 100% 0, 100% 80%, 0 90%);
 }
 
 .singleTour_img {
@@ -182,7 +183,7 @@
 
 .singleTour_name {
   position: absolute;
-  bottom: 0rem;
+  bottom: 1rem;
   right: 1.5rem;
   color: #f7f7f7;
   width: 70%;
@@ -206,7 +207,7 @@
 }
 
 .details_container {
-  padding: 1rem 2rem 0rem 2rem;
+  padding: 0rem 2rem 0rem 2rem;
 }
 
 .details_container h4 {
@@ -218,11 +219,11 @@
   letter-spacing: 0.05rem;
   line-height: 1.5;
   font-size: 1rem;
-  padding: 0.5rem 0;
+  padding: 0.2rem 0;
 }
 
 .card_data {
-  padding: 1.5rem 0;
+  padding: 1rem 0;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   row-gap: 1rem;
@@ -236,7 +237,7 @@
 
 .card_el span {
   padding-left: 0.5rem;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
 }
 .card_el_img {
   color: #55c57a;
@@ -246,7 +247,7 @@
 
 .card_footer {
   padding: 1rem 2rem;
-  background-color: #f1eeee;
+  background-color: #f3ecec;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -279,4 +280,31 @@
   transition: all 0.3s linear;
   transform: translateY(-3px);
   box-shadow: 0 1rem 2rem rgb(230, 222, 222);
+}
+
+/* notifacation */
+.notifacation {
+  position: fixed;
+  top: 0;
+  height: 5rem;
+  width: auto;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #f7f7f7;
+  padding: 1rem;
+  margin: 0 1rem;
+  font-size: 1.2rem;
+  border-radius: 0 0 0.5rem 0.5rem;
+}
+
+.green {
+  background-color: #55c57a;
+}
+
+.red {
+  background-color: rgb(253, 101, 101);
+}
+.hide {
+  display: none;
 }
