@@ -19,6 +19,7 @@ export default function SingleTour({
   stops,
   startLocation,
   startDate,
+  slug,
 }) {
   // to get the month name and year
   const date = new Date(startDate);

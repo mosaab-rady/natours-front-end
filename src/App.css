@@ -6,7 +6,7 @@
 .App {
   line-height: 2;
   margin: 2rem;
-  color: #777;
+  color: rgb(83, 80, 80);
   font-family: 'Open Sans Condensed', sans-serif;
   min-height: 100vh;
   display: flex;
@@ -14,6 +14,7 @@
   align-items: center;
   letter-spacing: 0.08rem;
   transition: all 0.3s linear;
+  background-color: rgb(245, 245, 245);
 }
 
 /* nav bar */
@@ -61,7 +62,7 @@
   }
 
   .btn_signup {
-    padding: 0.7rem 1.7rem;
+    padding: 0.65rem 2rem;
     border: 1px #f7f7f7 solid;
     border-radius: 3rem;
     margin-right: 1.3rem;
@@ -183,27 +184,27 @@
 
 .singleTour_name {
   position: absolute;
-  bottom: 1rem;
+  bottom: 1.5rem;
   right: 1.5rem;
-  color: #f7f7f7;
+  color: #fff;
   width: 70%;
-  font-size: 2.2rem;
-  font-weight: lighter;
   z-index: 10;
   text-align: right;
   line-height: 1.3;
+  font-size: 2.2rem;
+  font-weight: 300;
 }
 
 .singleTour_name span {
   text-transform: uppercase;
-  padding: 0.2rem 0.5rem;
+  padding: 0.2rem 1rem;
+  box-decoration-break: clone;
   background-image: linear-gradient(
     to bottom right,
-    rgba(155, 230, 144, 0.85),
-    rgba(30, 168, 124, 0.85)
+    rgba(125, 213, 111, 0.85),
+    rgba(40, 180, 135, 0.85)
   );
   border: 1px solid rgba(134, 221, 120, 0.85);
-  word-spacing: 0.5rem;
 }
 
 .details_container {
@@ -282,7 +283,7 @@
   box-shadow: 0 1rem 2rem rgb(230, 222, 222);
 }
 
-/* notifacation */
+/* alert */
 .notifacation {
   position: fixed;
   top: 0;
@@ -307,4 +308,128 @@
 }
 .hide {
   display: none;
+}
+
+/* details page */
+.hero_container {
+  position: relative;
+  height: auto;
+}
+
+.hero_img_container {
+  background-image: linear-gradient(to right bottom, #7dd56f, #28b487);
+  clip-path: polygon(0 0, 100% 0, 100% 70%, 0 92%);
+  height: 90vh;
+}
+
+.hero_img {
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+  opacity: 0.2;
+}
+
+.hero_details {
+  position: absolute;
+  top: 18vh;
+  left: 33vw;
+  height: 200px;
+  display: grid;
+  grid-template-rows: repeat(2, 1fr);
+}
+
+.hero_name {
+  text-transform: uppercase;
+  color: #fff;
+  font-size: 4vw;
+  font-weight: 100;
+  width: 70%;
+  height: 100px;
+  line-height: 1.3;
+  text-align: center;
+}
+
+.hero_name span {
+  text-transform: uppercase;
+  padding: 0.1rem 1rem;
+  box-decoration-break: clone;
+  background-image: linear-gradient(
+    to bottom right,
+    rgba(125, 213, 111, 0.85),
+    rgba(40, 180, 135, 0.85)
+  );
+  border: 1px solid rgba(134, 221, 120, 0.85);
+}
+
+@media screen and (max-width: 725px) {
+  .hero_img_container {
+    height: 60vh;
+  }
+  .hero_details {
+    top: 10vh;
+    left: 28vw;
+  }
+}
+
+.tour-description-container {
+  padding: 2rem 10rem 0 10rem;
+
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 5rem;
+}
+
+@media screen and (max-width: 830px) {
+  .tour-description-container {
+    padding: 0;
+  }
+}
+
+.overview-box {
+  padding: 1rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 5rem;
+}
+
+.description-box {
+  padding: 1rem;
+}
+.description-box__p {
+  margin-bottom: 2rem;
+}
+
+.overview-box__group__heading {
+  text-transform: uppercase;
+  color: #55c57a;
+  font-size: 1.7rem;
+  width: 100%;
+  padding-bottom: 1.5rem;
+  letter-spacing: 0.2rem;
+}
+
+.overview-box__group__el {
+  display: flex;
+  align-items: center;
+  padding-bottom: 1rem;
+}
+
+.overview-box__group__el__img {
+  color: #55c57a;
+  height: 1.7rem;
+  width: 1.7rem;
+  margin-right: 0.7rem;
+}
+.overview-box__group__el__p span {
+  color: rgb(83, 80, 80);
+  font-weight: 900;
+  margin-right: 1.5rem;
+  text-transform: uppercase;
+}
+
+.overview-box__group__el__img__user {
+  height: 2.5rem;
+  width: 2.5rem;
+  margin-right: 0.7rem;
+  border-radius: 50%;
 }

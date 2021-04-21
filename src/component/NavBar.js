@@ -7,7 +7,11 @@ const NavBar = () => {
   return (
     <>
       <div className='nav_container'>
-        <Link to='/' className='nav_link btn_all_tours'>
+        <Link
+          to='/'
+          className='nav_link btn_all_tours'
+          onClick={() => setToggle(false)}
+        >
           all tours
         </Link>
         <img id='logo_img' src='logo-white.png' alt='logo' />

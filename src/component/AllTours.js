@@ -6,7 +6,7 @@ import SingleTour from './SingleTour';
 const AllTours = () => {
   document.title = 'Natours | All Tours';
   let tours = [];
-  let error;
+  let err;
   const [response, setResponse] = useState();
   const getData = async () => {
     const data = await axios({
@@ -26,13 +26,13 @@ const AllTours = () => {
       tours = response.data.data.tours;
     }
     if (response.data.status === 'fail') {
-      error = response.data.data;
+      err = response.data.data;
     }
   }
 
   return (
     <>
-      {error ? <Alert error={error} status='fail' /> : ''}
+      {err ? <Alert error={err} status='fail' /> : ''}
       <div className='tours_container'>
         {tours.map((tour, id) => (
           <SingleTour
