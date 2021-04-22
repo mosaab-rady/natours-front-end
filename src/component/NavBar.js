@@ -14,7 +14,11 @@ const NavBar = () => {
         >
           all tours
         </Link>
-        <img id='logo_img' src='logo-white.png' alt='logo' />
+        <img
+          src={`http://localhost:5000/public/img/logo/logo-white.png`}
+          alt='logo'
+          id='logo_img'
+        />
         <BiAlignRight id='nav_icon' onClick={() => setToggle(!toggle)} />
         <ul
           className={

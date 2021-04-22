@@ -27,9 +27,14 @@ const TourDetails = () => {
   }, [id]);
 
   // set the tour and error
+
+  // if there is a response
   if (response) {
+    // check if the res is success
     if (response.data.status === 'success') {
+      // get the tour from response
       tour = response.data.data.tour;
+      // set the page title
       document.title = `Natours | ${tour.name} `;
       const date = new Date(tour.startDates[0]);
       const monthNumber = date.getMonth();
@@ -137,9 +142,29 @@ const TourDetails = () => {
               })}
             </div>
           </section>
+          <section className='tour-details__imgs-container'>
+            {tour.images.map((img, i) => {
+              return (
+                <div
+                  key={i}
+                  className='tour-details__imgs-container__img-container'
+                >
+                  <img
+                    src={`http://localhost:5000/public/img/tours/${img}`}
+                    alt={img}
+                    className='tour-details__imgs-container__img'
+                  />
+                </div>
+              );
+            })}
+          </section>
+          <section className='tour-details__map'>
+            <div id='map'></div>
+          </section>
         </div>
       );
     }
+    // if there is an error
     if (response.data.status === 'fail' || response.data.status === 'error') {
       err = response.data.data;
       if (response.data.status === 'error') {
