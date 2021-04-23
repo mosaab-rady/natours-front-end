@@ -1,32 +1,45 @@
-import axios from 'axios';
+// import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import Alert from './Alert';
 import Error from './Error';
+import { getData } from '../js/axios';
 
 import { AiOutlineCalendar } from 'react-icons/ai';
 import { BiTrendingUp, BiUser } from 'react-icons/bi';
 import { BsStar } from 'react-icons/bs';
+import { getMonthYear } from '../js/date';
+import Map from './Map';
 
-const TourDetails = () => {
+function TourDetails() {
   const { id } = useParams();
   const [response, setResponse] = useState();
+  const [reviews, setReviews] = useState([]);
 
   let tour = {};
   let err;
 
   useEffect(() => {
-    async function getTour() {
-      const data = await axios({
-        method: 'GET',
-        url: `http://localhost:5000/api/v1/tours/${id}`,
-      });
+    const getTour = async () => {
+      const data = await getData(
+        'GET',
+        `http://localhost:5000/api/v1/tours/${id}`
+      );
       setResponse(data);
-    }
+    };
     getTour();
-  }, [id]);
 
-  // set the tour and error
+    const getReviews = async () => {
+      const data = await getData(
+        'GET',
+        `http://localhost:5000/api/v1/tours/${id}/reviews`
+      );
+      if (data.data.status === 'success') {
+        setReviews(data.data.data.reviews);
+      }
+    };
+    getReviews();
+  }, [id]);
 
   // if there is a response
   if (response) {
@@ -36,24 +49,7 @@ const TourDetails = () => {
       tour = response.data.data.tour;
       // set the page title
       document.title = `Natours | ${tour.name} `;
-      const date = new Date(tour.startDates[0]);
-      const monthNumber = date.getMonth();
-      const year = date.getUTCFullYear();
-      const monthNames = [
-        'January',
-        'February',
-        'March',
-        'April',
-        'May',
-        'June',
-        'July',
-        'August',
-        'September',
-        'October',
-        'November',
-        'December',
-      ];
-      const month = monthNames[monthNumber];
+      const { month, year } = getMonthYear(tour.startDates[0]);
       const paragraphs = tour.description.split('\n');
       return (
         <div className='tour_details'>
@@ -159,7 +155,17 @@ const TourDetails = () => {
             })}
           </section>
           <section className='tour-details__map'>
-            <div id='map'></div>
+            <Map locations={tour.locations} />
+          </section>
+          <section className='tour-details__reviews-container'>
+            {reviews.map((review, i) => {
+              return (
+                <div
+                  key={i}
+                  className='tour-details__reviews-conyainer__review-container'
+                ></div>
+              );
+            })}
           </section>
         </div>
       );
@@ -177,6 +183,6 @@ const TourDetails = () => {
   } else {
     return null;
   }
-};
+}
 
 export default TourDetails;

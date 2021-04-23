@@ -3,6 +3,7 @@ import { BiUser } from 'react-icons/bi';
 import { AiOutlineCalendar } from 'react-icons/ai';
 import { FiFlag, FiMapPin } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
+import { getMonthYear } from '../js/date';
 // import axios from 'axios';
 
 export default function SingleTour({
@@ -22,24 +23,7 @@ export default function SingleTour({
   slug,
 }) {
   // to get the month name and year
-  const date = new Date(startDate);
-  const monthNumber = date.getMonth();
-  const year = date.getUTCFullYear();
-  const monthNames = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December',
-  ];
-  const month = monthNames[monthNumber];
+  const { month, year } = getMonthYear(startDate);
 
   return (
     <div className='tour_container'>

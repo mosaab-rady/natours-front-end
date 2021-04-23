@@ -311,6 +311,11 @@
 }
 
 /* details page */
+
+.tour_details {
+  width: 100%;
+}
+
 .hero_container {
   position: relative;
   height: auto;
@@ -373,7 +378,6 @@
 
 .tour-description-container {
   padding: 2rem 10rem 0 10rem;
-
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
   gap: 5rem;
@@ -394,10 +398,17 @@
 
 .description-box {
   padding: 1rem;
+  width: 100%;
 }
 .description-box__p {
   margin-bottom: 2rem;
   line-height: 2;
+}
+
+@media screen and (max-width: 500px) {
+  .description-box {
+    width: 90%;
+  }
 }
 
 .overview-box__group__heading {
@@ -441,21 +452,26 @@
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 0;
 }
-@media screen and (min-width: 830px) {
-  .tour-details__imgs-container {
-    clip-path: polygon(0 22%, 100% 0, 100% 70%, 0 100%);
-  }
-}
 
-@media screen and (max-width: 830px) {
-  .tour-details__imgs-container__img-container {
-    clip-path: polygon(0 22%, 100% 0, 100% 70%, 0 100%);
-    margin-bottom: -7rem;
-  }
+.tour-details__imgs-container__img-container {
+  clip-path: polygon(0 20%, 100% 0, 100% 75%, 0 95%);
+  margin-bottom: -6rem;
+  z-index: 1000;
 }
 
 .tour-details__imgs-container__img {
   object-fit: cover;
   width: 100%;
   height: 60vh;
+}
+
+.map-container {
+  height: 100vh;
+  width: 100%;
+}
+
+@media screen and (max-width: 830px) {
+  .map-container {
+    height: 70vh;
+  }
 }

@@ -1,24 +1,24 @@
-import axios from 'axios';
+// import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { getData } from '../js/axios';
 import Alert from './Alert';
 import SingleTour from './SingleTour';
 
-const AllTours = () => {
+function AllTours() {
   document.title = 'Natours | All Tours';
   let tours = [];
   let err;
   const [response, setResponse] = useState();
-  const getData = async () => {
-    const data = await axios({
-      method: 'GET',
-      url: 'http://localhost:5000/api/v1/tours',
-    });
-    setResponse(data);
-  };
 
   // runs after the page rendered
   useEffect(() => {
-    getData();
+    const method = 'GET';
+    const url = 'http://localhost:5000/api/v1/tours';
+    const getTours = async () => {
+      const data = await getData(method, url);
+      setResponse(data);
+    };
+    getTours();
   }, []);
 
   if (response) {
@@ -55,6 +55,6 @@ const AllTours = () => {
       </div>
     </>
   );
-};
+}
 
 export default AllTours;
