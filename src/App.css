@@ -448,30 +448,235 @@
 }
 
 .tour-details__imgs-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 0;
+  position: relative;
+  display: flex;
+  align-items: center;
+  clip-path: polygon(0 20%, 100% 0, 100% 80%, 0 100%);
+  height: 40rem;
+  background-image: linear-gradient(to right bottom, #7dd56f, #28b487);
+  z-index: 10;
 }
 
-.tour-details__imgs-container__img-container {
-  clip-path: polygon(0 20%, 100% 0, 100% 75%, 0 95%);
-  margin-bottom: -6rem;
-  z-index: 1000;
+.tour-details__imgs-container__imgs {
+  overflow: auto;
+  white-space: nowrap;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(350px, 1fr));
 }
+
+/* .tour-details__imgs-container__img-container {
+} */
 
 .tour-details__imgs-container__img {
   object-fit: cover;
   width: 100%;
-  height: 60vh;
+  height: 50vh;
+  padding: 2rem 0;
 }
 
 .map-container {
-  height: 100vh;
+  height: 50rem;
   width: 100%;
+  margin-top: -10rem;
 }
 
 @media screen and (max-width: 830px) {
   .map-container {
-    height: 70vh;
+    height: 40rem;
+  }
+}
+
+.tour-details__reviews {
+  position: relative;
+  display: flex;
+  align-items: center;
+  clip-path: polygon(0 20%, 100% 0, 100% 80%, 0 100%);
+  height: 50rem;
+  background-image: linear-gradient(to right bottom, #7dd56f, #28b487);
+  z-index: 10;
+  margin-top: -10rem;
+}
+
+.tour-details__reviews-container {
+  display: grid;
+  grid-column-gap: 3rem;
+  grid-auto-flow: column;
+  overflow: auto;
+  white-space: nowrap;
+  padding: 0 5rem;
+  /* overflow-x: scroll;
+  scroll-snap-type: x mandatory; */
+}
+
+.review-card {
+  position: relative;
+  background-color: #f7f7f7;
+  padding: 3rem;
+  margin: 3rem 0;
+  box-shadow: 0 1.5rem 4rem rgb(0 0 0 / 15%);
+  border-radius: 3px;
+  width: 18rem;
+  /* height: 18rem; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.review-card__user {
+  display: flex;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.review-card__user p {
+  font-size: 1.2rem;
+  font-weight: bolder;
+  text-transform: uppercase;
+}
+
+.review-card__user-img {
+  height: 3rem;
+  width: 3rem;
+  border-radius: 50%;
+  margin-right: 2rem;
+}
+
+.review-card__p {
+  white-space: normal;
+  font-size: 1.2rem;
+  line-height: 1.7;
+  width: 100%;
+  margin-bottom: 2rem;
+}
+
+.review-card__rating {
+  position: absolute;
+  bottom: 0.75rem;
+  padding: 1rem;
+}
+
+.star {
+  height: 1.2rem;
+  width: 1.2rem;
+  margin: 0.1rem;
+  color: #a0db96;
+}
+
+.active {
+  color: #28b487;
+}
+
+.section-cta {
+  width: 75vw;
+  background-color: white;
+  border-radius: 20px;
+  margin: 10rem auto;
+  box-shadow: 0 1.5rem 4rem rgb(0 0 0 / 15%);
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding: 3rem 0;
+}
+
+.section-cta__imgs {
+  display: flex;
+  align-items: center;
+  margin-right: 3rem;
+}
+
+.section-cta__imgs__logo-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: linear-gradient(
+    to right bottom,
+    rgb(125, 213, 111),
+    rgb(40, 180, 135)
+  );
+  border-radius: 50%;
+  padding: 1rem;
+  width: 9rem;
+  height: 9rem;
+  z-index: 10;
+  margin-left: -3rem;
+}
+
+.section-cta__logo {
+  width: 100%;
+}
+
+.section-cta__img {
+  border-radius: 50%;
+  width: 8.5rem;
+  height: 8.5rem;
+  margin-left: -6rem;
+}
+
+.section-cta__img-1 {
+  z-index: 9;
+}
+.section-cta__img-2 {
+  z-index: 8;
+}
+
+.section-cta__q h2 {
+  font-size: 2rem;
+  font-weight: bolder;
+  text-transform: uppercase;
+  background-image: linear-gradient(to right, #7dd56f, #28b487);
+  color: transparent;
+  background-clip: text;
+}
+
+.section-cta__q p {
+  font-size: 1.2rem;
+}
+
+@media screen and (max-width: 725px) {
+  .section-cta__q h2 {
+    font-size: 5vw;
+  }
+
+  .section-cta__q p {
+    font-size: 3vw;
+  }
+}
+
+.booking-btn {
+  padding: 1rem 2rem;
+  border: 0;
+  margin: 0 5rem;
+  border-radius: 3rem;
+  background-color: #55c57a;
+  font-size: 1.1rem;
+  color: #f7f7f7;
+  text-transform: capitalize;
+}
+
+.booking-btn:hover {
+  transition: all 0.3s linear;
+  transform: translateY(-3px);
+  box-shadow: 0 1.5rem 4rem rgb(0 0 0 / 15%);
+}
+
+@media screen and (max-width: 1100px) {
+  .section-cta {
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+  }
+  .section-cta__imgs {
+    margin-right: 0;
+  }
+  .section-cta__imgs__logo-container {
+    margin-left: 0;
+  }
+
+  .section-cta__q {
+    margin: 2rem 1rem;
+  }
+  .booking-btn {
+    width: 10rem;
   }
 }

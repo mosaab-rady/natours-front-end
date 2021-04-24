@@ -139,33 +139,86 @@ function TourDetails() {
             </div>
           </section>
           <section className='tour-details__imgs-container'>
-            {tour.images.map((img, i) => {
-              return (
-                <div
-                  key={i}
-                  className='tour-details__imgs-container__img-container'
-                >
+            <div className='tour-details__imgs-container__imgs'>
+              {tour.images.map((img, i) => {
+                return (
                   <img
+                    key={i}
                     src={`http://localhost:5000/public/img/tours/${img}`}
                     alt={img}
                     className='tour-details__imgs-container__img'
                   />
-                </div>
-              );
-            })}
+                );
+              })}
+            </div>
           </section>
           <section className='tour-details__map'>
             <Map locations={tour.locations} />
           </section>
-          <section className='tour-details__reviews-container'>
-            {reviews.map((review, i) => {
-              return (
-                <div
-                  key={i}
-                  className='tour-details__reviews-conyainer__review-container'
-                ></div>
-              );
-            })}
+          <section className='tour-details__reviews'>
+            <div className='tour-details__reviews-container'>
+              {reviews.map((review, i) => {
+                const userImg = review.user.photo;
+                return (
+                  <div key={i} className='review-card'>
+                    <div className='review-card__user'>
+                      <img
+                        className='review-card__user-img'
+                        src={`http://localhost:5000/public/img/users/${userImg}`}
+                        alt={review.user.name}
+                      />
+                      <p>{review.user.name}</p>
+                    </div>
+                    <div className='review-card__p'>
+                      <p>{review.review}</p>
+                    </div>
+                    <div className='review-card__rating'>
+                      {[1, 2, 3, 4, 5].map((star, i) => {
+                        return (
+                          <BsStar
+                            key={i}
+                            className={
+                              review.rating >= star
+                                ? 'active star'
+                                : 'inactive star'
+                            }
+                          />
+                        );
+                      })}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </section>
+          <section className='section-cta'>
+            <div className='section-cta__imgs'>
+              <div className='section-cta__imgs__logo-container'>
+                <img
+                  className='section-cta__logo'
+                  src={`http://localhost:5000/public/img/logo/logo-white.png`}
+                  alt='logo'
+                />
+              </div>
+              <img
+                className='section-cta__img section-cta__img-1'
+                src={`http://localhost:5000/public/img/tours/${tour.images[1]}`}
+                alt='tour-img'
+              />
+              <img
+                className='section-cta__img section-cta__img-2'
+                src={`http://localhost:5000/public/img/tours/${tour.images[2]}`}
+                alt='tour-img'
+              />
+            </div>
+            <div className='section-cta__q'>
+              <h2>what are you waiting for?</h2>
+              <p>
+                {tour.duration} days. 1 adventure. Infinite memories. Make it
+                yours today!
+              </p>
+            </div>
+            <button className='booking-btn'>book tour now!</button>
           </section>
         </div>
       );
