@@ -16,6 +16,7 @@ export default function Map({ locations }) {
       container: mapContainer.current,
       style: 'mapbox://styles/mapbox/light-v10',
       scrollZoom: false,
+
       // center: [lng, lat],
       // zoom: zoom,
     });
