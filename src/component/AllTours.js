@@ -32,7 +32,7 @@ function AllTours() {
 
   return (
     <>
-      {err ? <Alert error={err} status='fail' /> : ''}
+      {err ? <Alert message={err} status='fail' /> : ''}
       <div className='tours_container'>
         {tours.map((tour, id) => (
           <SingleTour

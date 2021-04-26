@@ -230,7 +230,7 @@ function TourDetails() {
         return <Error err={err} />;
       }
       if (response.data.status === 'fail') {
-        return <Alert error={err} status='fail' />;
+        return <Alert message={err} status='fail' />;
       }
     }
   } else {

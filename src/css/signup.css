@@ -39,6 +39,7 @@
 
 .form__group input {
   padding: 1rem;
+  font-size: 1.2rem;
   border: 0;
   background-color: #f2f2f2;
   border-top: 3px solid transparent;

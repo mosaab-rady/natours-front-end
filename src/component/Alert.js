@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from 'react';
+import { Redirect } from 'react-router';
 
-export default function Alert({ error, status }) {
+export default function Alert({ message, status, to }) {
   const [alert, setAlert] = useState('show');
 
   useEffect(() => {
-    setTimeout(hideAlert, 5000);
-  }, []);
+    setAlert('show');
+    setTimeout(() => {
+      setAlert('hide');
+    }, 7000);
+  }, [message]);
 
-  const hideAlert = () => {
-    setAlert('hide');
-  };
-
+  if (alert === 'hide' && to) {
+    return <Redirect to={to} />;
+  }
   return (
     <div
       className={
@@ -19,7 +22,7 @@ export default function Alert({ error, status }) {
           : `notifacation red ${alert}`
       }
     >
-      <p>{error}</p>
+      <p>{message}</p>
     </div>
   );
 }

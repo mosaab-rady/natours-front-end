@@ -292,10 +292,11 @@
   display: flex;
   align-items: center;
   text-align: center;
+  text-transform: capitalize;
   color: #f7f7f7;
   padding: 1rem;
   margin: 0 1rem;
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   border-radius: 0 0 0.5rem 0.5rem;
 }
 
@@ -306,6 +307,7 @@
 .red {
   background-color: rgb(253, 101, 101);
 }
+
 .hide {
   display: none;
 }
