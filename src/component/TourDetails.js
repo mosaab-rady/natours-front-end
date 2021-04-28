@@ -225,7 +225,7 @@ function TourDetails() {
     }
     // if there is an error
     if (response.data.status === 'fail' || response.data.status === 'error') {
-      err = response.data.data;
+      err = response.data.message;
       if (response.data.status === 'error') {
         return <Error err={err} />;
       }

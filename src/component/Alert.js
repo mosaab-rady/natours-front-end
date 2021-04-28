@@ -6,10 +6,14 @@ export default function Alert({ message, status, to }) {
 
   useEffect(() => {
     setAlert('show');
+    hideAlert();
+  }, [message]);
+
+  const hideAlert = () => {
     setTimeout(() => {
       setAlert('hide');
-    }, 7000);
-  }, [message]);
+    }, 5000);
+  };
 
   if (alert === 'hide' && to) {
     return <Redirect to={to} />;

@@ -25,8 +25,8 @@ function AllTours() {
     if (response.data.status === 'success') {
       tours = response.data.data.tours;
     }
-    if (response.data.status === 'fail') {
-      err = response.data.data;
+    if (response.data.status !== 'success') {
+      err = response.data.message;
     }
   }
 
