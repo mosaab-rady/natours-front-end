@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import Alert from './Alert';
 import Error from './Error';
-import { getData } from '../js/axios';
+import { request } from '../js/axios';
 
 import { AiOutlineCalendar } from 'react-icons/ai';
 import { BiTrendingUp, BiUser } from 'react-icons/bi';
@@ -21,7 +21,7 @@ function TourDetails() {
 
   useEffect(() => {
     const getTour = async () => {
-      const data = await getData(
+      const data = await request(
         'GET',
         `http://localhost:5000/api/v1/tours/${id}`
       );
@@ -30,7 +30,7 @@ function TourDetails() {
     getTour();
 
     const getReviews = async () => {
-      const data = await getData(
+      const data = await request(
         'GET',
         `http://localhost:5000/api/v1/tours/${id}/reviews`
       );

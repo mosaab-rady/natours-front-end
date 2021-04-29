@@ -1,6 +1,6 @@
 // import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { getData } from '../js/axios';
+import { request } from '../js/axios';
 import Alert from './Alert';
 import SingleTour from './SingleTour';
 
@@ -15,7 +15,7 @@ function AllTours() {
     const method = 'GET';
     const url = 'http://localhost:5000/api/v1/tours';
     const getTours = async () => {
-      const data = await getData(method, url);
+      const data = await request(method, url);
       setResponse(data);
     };
     getTours();

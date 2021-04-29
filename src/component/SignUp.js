@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import '../css/signup.css';
-import { postReq } from '../js/axios';
+import { request } from '../js/axios';
 import Alert from './Alert';
 
 function SignUp() {
@@ -31,7 +31,7 @@ function SignUp() {
     form.append('passwordConfirm', e.target.passwordConfirm.value);
     form.append('photo', e.target.photo.files[0]);
 
-    const data = await postReq(
+    const data = await request(
       'POST',
       `http://localhost:5000/api/v1/users/signUp`,
       form
@@ -44,7 +44,6 @@ function SignUp() {
       successAlert = (
         <Alert message='Signed up successfully' status='success' to='/' />
       );
-      document.cookie = `jwt_server=${response.data.token}`;
     }
     if (response.data.status !== 'success') {
       err = response.data.message;

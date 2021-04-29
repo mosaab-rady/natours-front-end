@@ -1,17 +1,18 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+import { myContext } from '../Context';
 import '../css/login.css';
-import { postReq } from '../js/axios';
+import { request } from '../js/axios';
 import Alert from './Alert';
 
 function LogIn() {
-  const [response, setResponse] = useState();
-  let successAlert;
-  let failAlert;
+  const { dispatch } = useContext(myContext);
+  const [successAlert, setSuccessAlert] = useState();
+  let [failAlert, setFailAlert] = useState();
   let err;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const data = await postReq(
+    const response = await request(
       'POST',
       `http://localhost:5000/api/v1/users/logIn`,
       {
@@ -19,21 +20,20 @@ function LogIn() {
         password: e.target.password.value,
       }
     );
-    setResponse(data);
+    // setResponse(data);
+    if (response) {
+      if (response.data.status === 'success') {
+        dispatch({ type: 'LOGGED_IN', payload: response.data.data.user });
+        setSuccessAlert(
+          <Alert message='Logged In successfully' status='success' to='/' />
+        );
+      }
+      if (response.data.status !== 'success') {
+        err = response.data.message;
+        setFailAlert(<Alert message={err} status='fail' />);
+      }
+    }
   };
-
-  if (response) {
-    if (response.data.status === 'success') {
-      successAlert = (
-        <Alert message='Logged In successfully' status='success' to='/' />
-      );
-      document.cookie = `jwt_server=${response.data.token}`;
-    }
-    if (response.data.status !== 'success') {
-      err = response.data.message;
-      failAlert = <Alert message={err} status='fail' />;
-    }
-  }
 
   return (
     <>

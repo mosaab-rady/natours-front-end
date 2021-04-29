@@ -1,8 +1,12 @@
 import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { BiAlignRight } from 'react-icons/bi';
+import { myContext } from '../Context';
 
 const NavBar = () => {
+  const { currentUser } = useContext(myContext);
+  console.log(currentUser);
+
   const [toggle, setToggle] = useState(false);
   return (
     <>
@@ -20,30 +24,62 @@ const NavBar = () => {
           id='logo_img'
         />
         <BiAlignRight id='nav_icon' onClick={() => setToggle(!toggle)} />
-        <ul
-          className={
-            toggle ? 'show_nav_links nav_links' : 'hide_nav_links nav_links'
-          }
-        >
-          <li className='nav_el'>
-            <Link
-              to='/login'
-              className='nav_link btn_login'
-              onClick={() => setToggle(!toggle)}
-            >
-              log in
-            </Link>
-          </li>
-          <li className='nav_el'>
-            <Link
-              to='/signup'
-              className='nav_link btn_signup'
-              onClick={() => setToggle(!toggle)}
-            >
-              sign up
-            </Link>
-          </li>
-        </ul>
+        {currentUser ? (
+          <ul
+            className={
+              toggle ? 'show_nav_links nav_links' : 'hide_nav_links nav_links'
+            }
+          >
+            <li className='nav_el'>
+              <Link
+                to='#'
+                className='nav_link me-btn'
+                onClick={() => setToggle(!toggle)}
+              >
+                <img
+                  className='nav-el__user-img'
+                  src={`http://localhost:5000/public/img/users/${currentUser.photo}`}
+                  alt={`user ${currentUser.name}`}
+                />
+                <span>{currentUser.name.split(' ')[0]}</span>
+              </Link>
+            </li>
+            <li className='nav_el'>
+              <Link
+                to='#'
+                className='nav_link btn_logout'
+                onClick={() => setToggle(!toggle)}
+              >
+                log out
+              </Link>
+            </li>
+          </ul>
+        ) : (
+          <ul
+            className={
+              toggle ? 'show_nav_links nav_links' : 'hide_nav_links nav_links'
+            }
+          >
+            <li className='nav_el'>
+              <Link
+                to='/login'
+                className='nav_link btn_login'
+                onClick={() => setToggle(!toggle)}
+              >
+                log in
+              </Link>
+            </li>
+            <li className='nav_el'>
+              <Link
+                to='/signup'
+                className='nav_link btn_signup'
+                onClick={() => setToggle(!toggle)}
+              >
+                sign up
+              </Link>
+            </li>
+          </ul>
+        )}
       </div>
     </>
   );
