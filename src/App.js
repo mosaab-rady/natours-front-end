@@ -7,6 +7,7 @@ import TourDetails from './component/TourDetails';
 import LogIn from './component/LogIn';
 import SignUp from './component/SignUp';
 import Error from './component/Error';
+import MyAccount from './component/MyAccount';
 
 function App() {
   return (
@@ -24,6 +25,9 @@ function App() {
         </Route>
         <Route path='/signup'>
           <SignUp />
+        </Route>
+        <Route path='/myaccount'>
+          <MyAccount />
         </Route>
         <Route path='*'>
           <Error />

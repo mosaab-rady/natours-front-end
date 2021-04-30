@@ -27,6 +27,7 @@ function LogIn() {
         setSuccessAlert(
           <Alert message='Logged In successfully' status='success' to='/' />
         );
+        document.cookie = `jwt_react=logged in sucessfully`;
       }
       if (response.data.status !== 'success') {
         err = response.data.message;

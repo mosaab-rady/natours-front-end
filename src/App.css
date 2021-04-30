@@ -314,6 +314,7 @@
   margin: 0 1rem;
   font-size: 1.5rem;
   border-radius: 0 0 0.5rem 0.5rem;
+  z-index: 10;
 }
 
 .green {

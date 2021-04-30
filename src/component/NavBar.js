@@ -2,14 +2,24 @@ import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { BiAlignRight } from 'react-icons/bi';
 import { myContext } from '../Context';
+import { request } from '../js/axios';
+import Alert from './Alert';
 
 const NavBar = () => {
   const { currentUser } = useContext(myContext);
-  console.log(currentUser);
-
+  const [alert, setAlert] = useState();
   const [toggle, setToggle] = useState(false);
+
+  const logout = async () => {
+    await request('GET', `http://localhost:5000/api/v1/users/logOut`);
+    document.cookie = 'jwt_react=; expires=Thu, 01 Jan 1970 00:00:00 UTC;';
+    setAlert(<Alert message='logged out' status='fail' />);
+    setTimeout(() => (window.location.href = '/'), 5000);
+  };
+
   return (
     <>
+      {alert}
       <div className='nav_container'>
         <Link
           to='/'
@@ -32,7 +42,7 @@ const NavBar = () => {
           >
             <li className='nav_el'>
               <Link
-                to='#'
+                to='/myaccount'
                 className='nav_link me-btn'
                 onClick={() => setToggle(!toggle)}
               >
@@ -48,7 +58,10 @@ const NavBar = () => {
               <Link
                 to='#'
                 className='nav_link btn_logout'
-                onClick={() => setToggle(!toggle)}
+                onClick={() => {
+                  setToggle(!toggle);
+                  logout();
+                }}
               >
                 log out
               </Link>

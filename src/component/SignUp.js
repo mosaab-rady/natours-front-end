@@ -1,16 +1,19 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+import { myContext } from '../Context';
 import '../css/signup.css';
 import { request } from '../js/axios';
 import Alert from './Alert';
 
 function SignUp() {
   const [userImage, setUserImage] = useState('default.jpg');
+  const { dispatch } = useContext(myContext);
 
-  const [response, setResponse] = useState();
+  // const [response, setResponse] = useState();
   let err;
   let successAlert;
   let failAlert;
 
+  // make the photo appear when the user choose it
   const handlePhoto = (e) => {
     e.preventDefault();
     if (e.target.files && e.target.files[0]) {
@@ -22,6 +25,7 @@ function SignUp() {
     }
   };
 
+  // send post request to signup the new user
   const handleSubmit = async (e) => {
     e.preventDefault();
     const form = new FormData();
@@ -31,26 +35,28 @@ function SignUp() {
     form.append('passwordConfirm', e.target.passwordConfirm.value);
     form.append('photo', e.target.photo.files[0]);
 
-    const data = await request(
+    const response = await request(
       'POST',
       `http://localhost:5000/api/v1/users/signUp`,
       form
     );
-    setResponse(data);
+    if (response) {
+      // if the request success show alert and change the state in the context
+      if (response.data.status === 'success') {
+        dispatch({ type: 'LOGGED_IN', payload: response.data.data.user });
+        successAlert = (
+          <Alert message='Signed up successfully' status='success' to='/' />
+        );
+        document.cookie = `jwt_react=logged in sucessfully`;
+      }
+      if (response.data.status !== 'success') {
+        err = response.data.message;
+        failAlert = <Alert message={err} status='fail' />;
+        // err = response.data.data;
+      }
+    }
   };
 
-  if (response) {
-    if (response.data.status === 'success') {
-      successAlert = (
-        <Alert message='Signed up successfully' status='success' to='/' />
-      );
-    }
-    if (response.data.status !== 'success') {
-      err = response.data.message;
-      failAlert = <Alert message={err} status='fail' />;
-      // err = response.data.data;
-    }
-  }
   return (
     <>
       {successAlert}
