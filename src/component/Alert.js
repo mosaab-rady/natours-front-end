@@ -3,7 +3,7 @@ import { Redirect } from 'react-router';
 
 export default function Alert({ message, status, to }) {
   const [alert, setAlert] = useState('show');
-  let time = status === 'success' ? 1500 : 5000;
+  let time = status === 'success' ? 1500 : 3000;
 
   useEffect(() => {
     setAlert('show');

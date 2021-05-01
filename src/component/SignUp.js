@@ -70,7 +70,7 @@ function SignUp() {
         >
           <div className='form__group'>
             <label htmlFor='name'>name</label>
-            <input type='text' required name='name' id='name' />
+            <input type='text' required name='name' id='name' minLength='4' />
           </div>
           <div className='form__group'>
             <label htmlFor='email'>email</label>
@@ -88,6 +88,7 @@ function SignUp() {
               type='password'
               placeholder='••••••••'
               required
+              minLength='8'
               name='password'
               id='password'
             />
@@ -97,13 +98,13 @@ function SignUp() {
             <input
               type='password'
               placeholder='••••••••'
+              minLength='8'
               required
               name='passwordConfirm'
               id='passwordConfirm'
             />
           </div>
-          <div className='form__group'>
-            <h2>photo</h2>
+          <div className='form__group-img'>
             <img src={userImage} alt='' className='signup__photo' />
             <label htmlFor='photo' className='photo-btn'>
               choose new photo

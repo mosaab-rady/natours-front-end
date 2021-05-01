@@ -303,18 +303,24 @@
 .notifacation {
   position: fixed;
   top: 0;
-  height: 5rem;
+  height: auto;
   width: auto;
   display: flex;
   align-items: center;
   text-align: center;
   text-transform: capitalize;
   color: #f7f7f7;
-  padding: 1rem;
+  padding: 1rem 10rem;
   margin: 0 1rem;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   border-radius: 0 0 0.5rem 0.5rem;
   z-index: 10;
+}
+
+@media screen and (max-width: 650px) {
+  .notifacation {
+    padding: 1rem 2rem;
+  }
 }
 
 .green {

@@ -46,7 +46,7 @@ function LogIn() {
           <div className='login-form__group'>
             <label htmlFor='email'>email</label>
             <input
-              type='text'
+              type='email'
               id='email'
               required
               name='email'
@@ -60,6 +60,7 @@ function LogIn() {
               required
               name='password'
               id='password'
+              minLength='8'
               placeholder='••••••••'
             />
           </div>
