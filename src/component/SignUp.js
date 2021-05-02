@@ -1,8 +1,8 @@
 import React, { useContext, useState } from 'react';
 import { myContext } from '../Context';
 import '../css/signup.css';
+import { showAlert } from '../js/alert';
 import { request } from '../js/axios';
-import Alert from './Alert';
 
 function SignUp() {
   const [userImage, setUserImage] = useState('default.jpg');
@@ -10,8 +10,6 @@ function SignUp() {
 
   // const [response, setResponse] = useState();
   let err;
-  let successAlert;
-  let failAlert;
 
   // make the photo appear when the user choose it
   const handlePhoto = (e) => {
@@ -44,14 +42,13 @@ function SignUp() {
       // if the request success show alert and change the state in the context
       if (response.data.status === 'success') {
         dispatch({ type: 'LOGGED_IN', payload: response.data.data.user });
-        successAlert = (
-          <Alert message='Signed up successfully' status='success' to='/' />
-        );
+        showAlert(response.data.status, 'signed up successfully');
         document.cookie = `jwt_react=logged in sucessfully`;
+        setTimeout(() => (window.location.href = '/'), 1500);
       }
       if (response.data.status !== 'success') {
         err = response.data.message;
-        failAlert = <Alert message={err} status='fail' />;
+        showAlert(response.data.status, err, 5000);
         // err = response.data.data;
       }
     }
@@ -59,8 +56,6 @@ function SignUp() {
 
   return (
     <>
-      {successAlert}
-      {failAlert}
       <div className='signup-container'>
         <h1 className='signup-container__header'>create new account</h1>
         <form

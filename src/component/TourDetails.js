@@ -1,7 +1,6 @@
 // import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
-import Alert from './Alert';
 import Error from './Error';
 import { request } from '../js/axios';
 
@@ -10,6 +9,7 @@ import { BiTrendingUp, BiUser } from 'react-icons/bi';
 import { BsStar } from 'react-icons/bs';
 import { getMonthYear } from '../js/date';
 import Map from './Map';
+import { showAlert } from '../js/alert';
 
 function TourDetails() {
   const { id } = useParams();
@@ -230,7 +230,8 @@ function TourDetails() {
         return <Error err={err} />;
       }
       if (response.data.status === 'fail') {
-        return <Alert message={err} status='fail' />;
+        showAlert(response.data.status, err, 5);
+        return null;
       }
     }
   } else {

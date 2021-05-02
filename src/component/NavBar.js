@@ -3,23 +3,21 @@ import { Link } from 'react-router-dom';
 import { BiAlignRight } from 'react-icons/bi';
 import { myContext } from '../Context';
 import { request } from '../js/axios';
-import Alert from './Alert';
+import { showAlert } from '../js/alert';
 
 const NavBar = () => {
   const { currentUser } = useContext(myContext);
-  const [alert, setAlert] = useState();
   const [toggle, setToggle] = useState(false);
 
   const logout = async () => {
     await request('GET', `http://localhost:5000/api/v1/users/logOut`);
     document.cookie = 'jwt_react=; expires=Thu, 01 Jan 1970 00:00:00 UTC;';
-    setAlert(<Alert message='logged out' status='fail' />);
-    setTimeout(() => (window.location.href = '/'), 5000);
+    showAlert('fail', 'logged out', 3);
+    setTimeout(() => (window.location.href = '/'), 3000);
   };
 
   return (
     <>
-      {alert}
       <div className='nav_container'>
         <Link
           to='/'

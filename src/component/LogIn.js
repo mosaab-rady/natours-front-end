@@ -1,13 +1,11 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { myContext } from '../Context';
 import '../css/login.css';
+import { showAlert } from '../js/alert';
 import { request } from '../js/axios';
-import Alert from './Alert';
 
 function LogIn() {
   const { dispatch } = useContext(myContext);
-  const [successAlert, setSuccessAlert] = useState();
-  let [failAlert, setFailAlert] = useState();
   let err;
 
   const handleSubmit = async (e) => {
@@ -24,22 +22,19 @@ function LogIn() {
     if (response) {
       if (response.data.status === 'success') {
         dispatch({ type: 'LOGGED_IN', payload: response.data.data.user });
-        setSuccessAlert(
-          <Alert message='Logged In successfully' status='success' to='/' />
-        );
+        showAlert(response.data.status, 'Logged In successfully', 1.5);
         document.cookie = `jwt_react=logged in sucessfully`;
+        setTimeout(() => (window.location.href = '/'), 1500);
       }
       if (response.data.status !== 'success') {
         err = response.data.message;
-        setFailAlert(<Alert message={err} status='fail' />);
+        showAlert(response.data.status, err, 5);
       }
     }
   };
 
   return (
     <>
-      {successAlert}
-      {failAlert}
       <div className='login-container'>
         <h1 className='login-container__header'>log into your account</h1>
         <form className='login-form' onSubmit={handleSubmit}>

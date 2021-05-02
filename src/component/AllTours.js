@@ -1,7 +1,7 @@
 // import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { showAlert } from '../js/alert';
 import { request } from '../js/axios';
-import Alert from './Alert';
 import SingleTour from './SingleTour';
 
 function AllTours() {
@@ -27,12 +27,12 @@ function AllTours() {
     }
     if (response.data.status !== 'success') {
       err = response.data.message;
+      showAlert(response.data.status, err, 5);
     }
   }
 
   return (
     <>
-      {err ? <Alert message={err} status='fail' /> : ''}
       <div className='tours_container'>
         {tours.map((tour, id) => (
           <SingleTour
