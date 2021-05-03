@@ -51,7 +51,7 @@
   height: 2.2rem;
 }
 
-@media screen and (min-width: 725px) {
+@media screen and (min-width: 850px) {
   #nav_icon {
     display: none;
   }
@@ -75,7 +75,7 @@
   }
 }
 
-@media screen and (max-width: 724px) {
+@media screen and (max-width: 850px) {
   .hide_nav_links {
     position: absolute;
     top: 5rem;
@@ -669,7 +669,8 @@
 }
 
 .booking-btn {
-  padding: 1rem 2rem;
+  padding: 1rem 0rem;
+  width: 15rem;
   border: 0;
   margin: 0 5rem;
   border-radius: 3rem;

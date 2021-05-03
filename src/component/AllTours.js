@@ -13,7 +13,7 @@ function AllTours() {
   // runs after the page rendered
   useEffect(() => {
     const method = 'GET';
-    const url = 'http://localhost:5000/api/v1/tours';
+    const url = '/api/v1/tours';
     const getTours = async () => {
       const data = await request(method, url);
       setResponse(data);

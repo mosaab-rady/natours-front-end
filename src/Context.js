@@ -23,9 +23,7 @@ export default function Context({ children }) {
     if (
       document.cookie
         .split(';')
-        .some((item) =>
-          item.trim().startsWith('jwt_react=logged in sucessfully')
-        ) &&
+        .some((item) => item.trim().startsWith('jwt_server=')) &&
       !state.currentUser
     ) {
       const getMe = async () => {

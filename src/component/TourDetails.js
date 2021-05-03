@@ -1,5 +1,5 @@
 // import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import Error from './Error';
 import { request } from '../js/axios';
@@ -10,9 +10,12 @@ import { BsStar } from 'react-icons/bs';
 import { getMonthYear } from '../js/date';
 import Map from './Map';
 import { showAlert } from '../js/alert';
+// import { Link } from 'react-router-dom';
+import { myContext } from '../Context';
 
 function TourDetails() {
   const { id } = useParams();
+  const { currentUser } = useContext(myContext);
   const [response, setResponse] = useState();
   const [reviews, setReviews] = useState([]);
 
@@ -21,19 +24,13 @@ function TourDetails() {
 
   useEffect(() => {
     const getTour = async () => {
-      const data = await request(
-        'GET',
-        `http://localhost:5000/api/v1/tours/${id}`
-      );
+      const data = await request('GET', `/api/v1/tours/${id}`);
       setResponse(data);
     };
     getTour();
 
     const getReviews = async () => {
-      const data = await request(
-        'GET',
-        `http://localhost:5000/api/v1/tours/${id}/reviews`
-      );
+      const data = await request('GET', `/api/v1/tours/${id}/reviews`);
       if (data.data.status === 'success') {
         setReviews(data.data.data.reviews);
       }
@@ -218,7 +215,16 @@ function TourDetails() {
                 yours today!
               </p>
             </div>
-            <button className='booking-btn'>book tour now!</button>
+            {currentUser ? (
+              <button className='booking-btn'>book tour now!</button>
+            ) : (
+              <button
+                onClick={() => (window.location.href = '/login')}
+                className='booking-btn'
+              >
+                log in to book tour
+              </button>
+            )}
           </section>
         </div>
       );

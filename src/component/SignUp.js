@@ -33,22 +33,17 @@ function SignUp() {
     form.append('passwordConfirm', e.target.passwordConfirm.value);
     form.append('photo', e.target.photo.files[0]);
 
-    const response = await request(
-      'POST',
-      `http://localhost:5000/api/v1/users/signUp`,
-      form
-    );
+    const response = await request('POST', `/api/v1/users/signUp`, form);
     if (response) {
       // if the request success show alert and change the state in the context
       if (response.data.status === 'success') {
         dispatch({ type: 'LOGGED_IN', payload: response.data.data.user });
-        showAlert(response.data.status, 'signed up successfully');
-        document.cookie = `jwt_react=logged in sucessfully`;
+        showAlert(response.data.status, 'signed up successfully', 1.5);
         setTimeout(() => (window.location.href = '/'), 1500);
       }
       if (response.data.status !== 'success') {
         err = response.data.message;
-        showAlert(response.data.status, err, 5000);
+        showAlert(response.data.status, err, 5);
         // err = response.data.data;
       }
     }

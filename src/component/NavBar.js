@@ -10,8 +10,7 @@ const NavBar = () => {
   const [toggle, setToggle] = useState(false);
 
   const logout = async () => {
-    await request('GET', `http://localhost:5000/api/v1/users/logOut`);
-    document.cookie = 'jwt_react=; expires=Thu, 01 Jan 1970 00:00:00 UTC;';
+    await request('GET', `/api/v1/users/logOut`);
     showAlert('fail', 'logged out', 3);
     setTimeout(() => (window.location.href = '/'), 3000);
   };

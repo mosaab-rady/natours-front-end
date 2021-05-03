@@ -10,20 +10,15 @@ function LogIn() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await request(
-      'POST',
-      `http://localhost:5000/api/v1/users/logIn`,
-      {
-        email: e.target.email.value,
-        password: e.target.password.value,
-      }
-    );
+    const response = await request('POST', `/api/v1/users/logIn`, {
+      email: e.target.email.value,
+      password: e.target.password.value,
+    });
     // setResponse(data);
     if (response) {
       if (response.data.status === 'success') {
         dispatch({ type: 'LOGGED_IN', payload: response.data.data.user });
         showAlert(response.data.status, 'Logged In successfully', 1.5);
-        document.cookie = `jwt_react=logged in sucessfully`;
         setTimeout(() => (window.location.href = '/'), 1500);
       }
       if (response.data.status !== 'success') {

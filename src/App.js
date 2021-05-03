@@ -7,7 +7,7 @@ import TourDetails from './component/TourDetails';
 import LogIn from './component/LogIn';
 import SignUp from './component/SignUp';
 import Error from './component/Error';
-import MyAccount from './component/MyAccount';
+import MyAccount from './component/my-account-page/MyAccount';
 
 function App() {
   return (

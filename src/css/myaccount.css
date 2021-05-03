@@ -40,9 +40,30 @@
   transition: all 0.3s linear;
 }
 
+.admin-links {
+  margin-top: 4rem;
+}
+
+.admin-links__header {
+  border-bottom: 1px solid #f2f2f2;
+  margin: 1rem 3rem;
+}
+
+.admin-links h3 {
+  font-size: 0.9rem;
+  color: #f2f2f2;
+  text-transform: uppercase;
+  font-family: inherit;
+  font-weight: 600;
+}
+
+.component {
+  width: 52rem;
+  transition: all 0.3s linear;
+}
+
 .me__settings {
   padding: 3rem 10rem;
-  width: 52rem;
 }
 
 .side-nav__el {
@@ -67,8 +88,8 @@
 }
 
 .side-nav__el__icon {
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 1.2rem;
+  height: 1.2rem;
   margin-right: 1.5rem;
   margin-left: 1.5rem;
 }
@@ -137,22 +158,21 @@
 }
 
 @media screen and (max-width: 1155px) {
-  .me__settings {
+  .component {
     width: 40rem;
   }
 }
 
 @media screen and (max-width: 965px) {
-  .me__settings {
+  .component {
     width: 30rem;
+  }
+  .me__settings {
     padding: 3rem 2rem;
   }
 }
 
 @media screen and (max-width: 805px) {
-  .me-container {
-    width: 100%;
-  }
   .apps-icon {
     display: block;
   }
@@ -160,13 +180,15 @@
     width: 0;
   }
   .show-side-nav {
-    width: 100%;
+    width: 70vw;
   }
-  .me__settings {
-    width: 80%;
+  .component {
+    width: 70vw;
   }
   .hide-me-settings {
-    display: none;
+    /* display: none; */
+    width: 0;
+    overflow: hidden;
   }
   .me__settings h2 {
     font-size: 1.5rem;

@@ -1,10 +1,15 @@
 import React, { useContext, useState } from 'react';
-import '../css/myaccount.css';
-import { FiSettings, FiBriefcase, FiCreditCard } from 'react-icons/fi';
+import '../../css/myaccount.css';
+import {
+  FiSettings,
+  FiBriefcase,
+  FiCreditCard,
+  FiMap,
+  FiUsers,
+} from 'react-icons/fi';
 import { BsStar } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
-import { myContext } from '../Context';
-import { RiMenuFoldFill } from 'react-icons/ri';
+import { myContext } from '../../Context';
 import { AiOutlineClose } from 'react-icons/ai';
 import { TiThMenuOutline } from 'react-icons/ti';
 
@@ -12,6 +17,10 @@ import Settings from './MySettings';
 import MyBookings from './MyBookings';
 import MyReviews from './MyReviews';
 import MyBilling from './MyBilling';
+import ManageTours from './admin-component/ManageTours';
+import ManageUsers from './admin-component/ManageUsers';
+import ManageReviews from './admin-component/ManageReviews';
+import ManageBookings from './admin-component/ManageBookings';
 
 export default function MyAccount() {
   const { currentUser } = useContext(myContext);
@@ -94,12 +103,85 @@ export default function MyAccount() {
               <FiCreditCard className='side-nav__el__icon' />
               <span>billing</span>
             </Link>
+            {currentUser.role === 'admin' ? (
+              <div className='admin-links'>
+                <div className='admin-links__header'>
+                  <h3>admin</h3>
+                </div>
+                <Link
+                  to='#'
+                  className={
+                    active === 'manageTours'
+                      ? 'side-nav__el active'
+                      : 'side-nav__el'
+                  }
+                  onClick={() => {
+                    setToggle(false);
+                    setComponent(<ManageTours />);
+                    setActive('manageTours');
+                  }}
+                >
+                  <FiMap className='side-nav__el__icon' />
+                  <span>manage tours</span>
+                </Link>{' '}
+                <Link
+                  to='#'
+                  className={
+                    active === 'manageUsers'
+                      ? 'side-nav__el active'
+                      : 'side-nav__el'
+                  }
+                  onClick={() => {
+                    setToggle(false);
+                    setComponent(<ManageUsers />);
+                    setActive('manageUsers');
+                  }}
+                >
+                  <FiUsers className='side-nav__el__icon' />
+                  <span>manage users</span>
+                </Link>
+                <Link
+                  to='#'
+                  className={
+                    active === 'manageReviews'
+                      ? 'side-nav__el active'
+                      : 'side-nav__el'
+                  }
+                  onClick={() => {
+                    setToggle(false);
+                    setComponent(<ManageReviews />);
+                    setActive('manageReviews');
+                  }}
+                >
+                  <BsStar className='side-nav__el__icon' />
+                  <span>manage reviews</span>
+                </Link>
+                <Link
+                  to='#'
+                  className={
+                    active === 'manageBookings'
+                      ? 'side-nav__el active'
+                      : 'side-nav__el'
+                  }
+                  onClick={() => {
+                    setToggle(false);
+                    setComponent(<ManageBookings />);
+                    setActive('manageBookings');
+                  }}
+                >
+                  <FiBriefcase className='side-nav__el__icon' />
+                  <span>manage bookings</span>
+                </Link>
+              </div>
+            ) : (
+              ''
+            )}
           </div>
           <div
             className={
               toggle
-                ? 'me__settings hide-me-settings'
-                : 'me__settings show-me-settings'
+                ? 'component hide-me-settings'
+                : 'component show-me-settings'
             }
           >
             {component}

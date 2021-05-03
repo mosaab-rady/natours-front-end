@@ -1,8 +1,8 @@
 import React, { useContext, useState } from 'react';
-import '../css/myaccount.css';
-import { request } from '../js/axios';
-import { myContext } from '../Context';
-import { showAlert } from '../js/alert';
+import '../../css/myaccount.css';
+import { request } from '../../js/axios';
+import { myContext } from '../../Context';
+import { showAlert } from '../../js/alert';
 
 export default function Settings() {
   const { dispatch, currentUser } = useContext(myContext);
@@ -28,11 +28,7 @@ export default function Settings() {
     form.append('email', e.target.email.value);
     form.append('photo', e.target.photo.files[0]);
 
-    const response = await request(
-      'PATCH',
-      `http://localhost:5000/api/v1/users/updateMe`,
-      form
-    );
+    const response = await request('PATCH', `/api/v1/users/updateMe`, form);
     if (response) {
       // if the request success show alert and change the state in the context
       if (response.data.status === 'success') {
@@ -57,7 +53,7 @@ export default function Settings() {
 
     const response = await request(
       'PATCH',
-      `http://localhost:5000/api/v1/users/updatePassword`,
+      `/api/v1/users/updatePassword`,
       form
     );
     if (response) {
@@ -76,7 +72,7 @@ export default function Settings() {
   };
 
   return (
-    <>
+    <div className='me__settings'>
       <div className='me__account'>
         <h2>your account settings</h2>
         <form
@@ -168,6 +164,6 @@ export default function Settings() {
           <button className='settings-btn'>save password</button>
         </form>
       </div>
-    </>
+    </div>
   );
 }
