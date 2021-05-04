@@ -5,6 +5,7 @@ import { showAlert } from '../js/alert';
 import { request } from '../js/axios';
 
 function SignUp() {
+  document.title = `Natours | Sign Up `;
   const [userImage, setUserImage] = useState('default.jpg');
   const { dispatch } = useContext(myContext);
 

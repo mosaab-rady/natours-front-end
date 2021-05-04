@@ -34,9 +34,9 @@ function AllTours() {
   return (
     <>
       <div className='tours_container'>
-        {tours.map((tour, id) => (
+        {tours.map((tour, i) => (
           <SingleTour
-            key={id}
+            key={i}
             id={tour.id}
             imageCover={tour.imageCover}
             name={tour.name}
@@ -50,6 +50,7 @@ function AllTours() {
             stops={tour.locations.length}
             startLocation={tour.startLocation.description}
             startDate={tour.startDates[0]}
+            slug={tour.slug}
           />
         ))}
       </div>

@@ -1,6 +1,6 @@
 // import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react';
-import { useParams } from 'react-router';
+// import { useParams } from 'react-router';
 import Error from './Error';
 import { request } from '../js/axios';
 
@@ -12,9 +12,13 @@ import Map from './Map';
 import { showAlert } from '../js/alert';
 // import { Link } from 'react-router-dom';
 import { myContext } from '../Context';
+import { useLocation } from 'react-router';
 
 function TourDetails() {
-  const { id } = useParams();
+  const { state } = useLocation();
+  let id;
+  if (state) id = state.tourId;
+  // const { id } = useParams();
   const { currentUser } = useContext(myContext);
   const [response, setResponse] = useState();
   const [reviews, setReviews] = useState([]);
@@ -166,8 +170,8 @@ function TourDetails() {
                       />
                       <p>{review.user.name}</p>
                     </div>
-                    <div className='review-card__p'>
-                      <p>{review.review}</p>
+                    <div className='review-card__p-1'>
+                      <div className='review-card__p-2'>{review.review}</div>
                     </div>
                     <div className='review-card__rating'>
                       {[1, 2, 3, 4, 5].map((star, i) => {

@@ -5,6 +5,7 @@ import { showAlert } from '../js/alert';
 import { request } from '../js/axios';
 
 function LogIn() {
+  document.title = `Natours | Log In `;
   const { dispatch } = useContext(myContext);
   let err;
 

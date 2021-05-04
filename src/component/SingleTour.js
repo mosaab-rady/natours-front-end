@@ -4,6 +4,7 @@ import { AiOutlineCalendar } from 'react-icons/ai';
 import { FiFlag, FiMapPin } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 import { getMonthYear } from '../js/date';
+// import TourDetails from './TourDetails';
 // import axios from 'axios';
 
 export default function SingleTour({
@@ -81,7 +82,10 @@ export default function SingleTour({
             </span>
           </div>
         </div>
-        <Link to={`/tour/${id}`} className='nav_link details_link'>
+        <Link
+          to={{ pathname: `/tour/${slug}`, state: { tourId: id } }}
+          className='nav_link details_link'
+        >
           details
         </Link>
       </div>

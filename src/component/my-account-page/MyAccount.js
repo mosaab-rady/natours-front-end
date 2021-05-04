@@ -29,6 +29,7 @@ export default function MyAccount() {
   const [active, setActive] = useState('settings');
 
   if (currentUser) {
+    document.title = `Natours | ${currentUser.name} `;
     return (
       <>
         <section className='me-container'>
