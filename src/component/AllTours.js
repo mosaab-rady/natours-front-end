@@ -1,35 +1,38 @@
 // import axios from 'axios';
-import React, { useEffect, useState } from 'react';
-import { showAlert } from '../js/alert';
-import { request } from '../js/axios';
+import React, { useContext } from 'react';
+import { myContext } from '../Context';
+
+// import { showAlert } from '../js/alert';
+// import { request } from '../js/axios';
 import SingleTour from './SingleTour';
 
 function AllTours() {
   document.title = 'Natours | All Tours';
-  let tours = [];
-  let err;
-  const [response, setResponse] = useState();
+  const { allTours } = useContext(myContext);
+  let tours = allTours;
+  // let err;
+  // const [response, setResponse] = useState();
 
   // runs after the page rendered
-  useEffect(() => {
-    const method = 'GET';
-    const url = '/api/v1/tours';
-    const getTours = async () => {
-      const data = await request(method, url);
-      setResponse(data);
-    };
-    getTours();
-  }, []);
+  // useEffect(() => {
+  //   const method = 'GET';
+  //   const url = '/api/v1/tours';
+  //   const getTours = async () => {
+  //     const data = await request(method, url);
+  //     setResponse(data);
+  //   };
+  //   getTours();
+  // }, []);
 
-  if (response) {
-    if (response.data.status === 'success') {
-      tours = response.data.data.tours;
-    }
-    if (response.data.status !== 'success') {
-      err = response.data.message;
-      showAlert(response.data.status, err, 5);
-    }
-  }
+  // if (response) {
+  //   if (response.data.status === 'success') {
+  //     tours = response.data.data.tours;
+  //   }
+  //   if (response.data.status !== 'success') {
+  //     err = response.data.message;
+  //     showAlert(response.data.status, err, 5);
+  //   }
+  // }
 
   return (
     <>

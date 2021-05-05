@@ -43,8 +43,8 @@ export default function Map({ locations }) {
     });
     map.fitBounds(bounds, {
       padding: {
-        top: 300,
-        bottom: 150,
+        top: 200,
+        bottom: 200,
         left: 100,
         right: 100,
       },
