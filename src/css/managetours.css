@@ -1,6 +1,7 @@
 .manage-tours {
   position: relative;
   padding: 5rem 2rem;
+  /* background-color: #ebebeb; */
 }
 
 .add-icon {
@@ -16,4 +17,11 @@
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   grid-template-rows: auto;
   gap: 4.2rem;
+}
+
+@media screen and (max-width: 450px) {
+  .manage-tours {
+    padding: 5rem 1.5rem;
+    width: 100%;
+  }
 }

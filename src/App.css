@@ -6,7 +6,7 @@
 .App {
   line-height: 2;
   margin: 2rem;
-  color: rgb(83, 80, 80);
+  color: #777;
   font-family: 'Open Sans Condensed', sans-serif;
   min-height: 100vh;
   display: flex;

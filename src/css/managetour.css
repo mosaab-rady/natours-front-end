@@ -150,3 +150,9 @@
   transition: all 0.3s linear;
   transform: translateY(-3px);
 }
+
+@media screen and (max-width: 450px) {
+  .manage-tours__single-tour {
+    width: 95%;
+  }
+}

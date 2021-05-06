@@ -205,6 +205,42 @@
 }
 
 @media screen and (max-width: 450px) {
+  .me-container {
+    width: 90%;
+  }
+  /* .me__settings {
+    padding: 3rem 2rem;
+    width: 100%;
+  } */
+  .apps-icon {
+    display: block;
+  }
+  .side-nav {
+    width: 0;
+  }
+  .show-side-nav {
+    width: 90vw;
+  }
+  .component {
+    width: 90vw;
+  }
+  .hide-me-settings {
+    /* display: none; */
+    width: 0;
+    overflow: hidden;
+  }
+  .me__settings h2 {
+    font-size: 1.5rem;
+  }
+
+  .hide-apps-icon {
+    display: none;
+  }
+
+  .show-x {
+    display: block;
+  }
+
   .settings-photo {
     height: 3rem;
     width: 3rem;
