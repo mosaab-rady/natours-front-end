@@ -38,7 +38,7 @@ function TourDetails() {
   if (tour) {
     document.title = `Natours | ${tour.name} `;
     const { month, year } = getMonthYear(tour.startDates[0]);
-    const paragraphs = tour.description.split('\n');
+
     return (
       <div className='tour_details'>
         <div className='hero_container'>
@@ -115,13 +115,7 @@ function TourDetails() {
             <h2 className='overview-box__group__heading'>
               about {tour.name} tour
             </h2>
-            {paragraphs.map((p, i) => {
-              return (
-                <p key={i} className='description-box__p'>
-                  {p}
-                </p>
-              );
-            })}
+            <p className='description-box__p'>{tour.description}</p>
           </div>
         </section>
         <section className='tour-details__imgs-container'>

@@ -5,6 +5,8 @@ import { BiUser } from 'react-icons/bi';
 import { AiOutlineCalendar } from 'react-icons/ai';
 import { FiFlag, FiMapPin } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
+import { request } from '../../../js/axios';
+import { showAlert } from '../../../js/alert';
 
 export default function ManageTour({
   id,
@@ -21,8 +23,25 @@ export default function ManageTour({
   startLocation,
   startDate,
   slug,
+  setUpdateTour,
+  setId,
 }) {
   const { month, year } = getMonthYear(startDate);
+
+  const deleteTour = (id) => async (e) => {
+    e.preventDefault();
+    const response = await request('DELETE', `/api/v1/tours/${id}`);
+    if ((response.status = 204)) {
+      showAlert('success', 'tour deleted', 1.5);
+      setTimeout(() => {
+        document.location.reload();
+      }, 1500);
+    }
+    if (response.status !== 204) {
+      showAlert('fail', response.data.message, 3);
+    }
+  };
+
   return (
     <div className='manage-tours__single-tour'>
       {/* display the image cover and name of the tour */}
@@ -89,8 +108,18 @@ export default function ManageTour({
         </Link>
       </div>
       <div className='single-tour__buttons'>
-        <button className='single-tour__button'>update</button>
-        <button className='single-tour__button'>delete</button>
+        <button
+          className='single-tour__button'
+          onClick={() => {
+            setUpdateTour(true);
+            setId(id);
+          }}
+        >
+          update
+        </button>
+        <button className='single-tour__button' onClick={deleteTour(id)}>
+          delete
+        </button>
       </div>
     </div>
   );

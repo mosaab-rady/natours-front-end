@@ -5,15 +5,25 @@ import { Link } from 'react-router-dom';
 import { myContext } from '../../../Context';
 import ManageTour from './ManageTour';
 import CreateTour from './CreateTour';
+import UpdateTour from './UpdateTour';
 
 export default function ManageTours() {
   const { allTours } = useContext(myContext);
   const [createTour, setCreateTour] = useState(false);
+  const [updateTour, setUpdateTour] = useState(false);
+  const [id, setId] = useState();
 
   return (
     <div className='manage-tours'>
-      {createTour ? (
-        <Link to='#' title='back to tours' onClick={() => setCreateTour(false)}>
+      {createTour || updateTour ? (
+        <Link
+          to='#'
+          title='back to tours'
+          onClick={() => {
+            setCreateTour(false);
+            setUpdateTour(false);
+          }}
+        >
           <BiArrowBack className='add-icon' />
         </Link>
       ) : (
@@ -23,6 +33,8 @@ export default function ManageTours() {
       )}
       {createTour ? (
         <CreateTour />
+      ) : updateTour ? (
+        <UpdateTour id={id} />
       ) : (
         <div className='tours-container'>
           {allTours.map((tour, i) => {
@@ -43,6 +55,8 @@ export default function ManageTours() {
                 startLocation={tour.startLocation.description}
                 startDate={tour.startDates[0]}
                 slug={tour.slug}
+                setUpdateTour={setUpdateTour}
+                setId={setId}
               />
             );
           })}

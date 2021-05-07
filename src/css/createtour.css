@@ -120,6 +120,10 @@ textarea:focus:invalid {
   width: 5rem;
 }
 
+.discriptionLocation input {
+  width: 15rem;
+}
+
 /* .startLocation h2 {
   text-transform: uppercase;
   background-image: linear-gradient(to right, #7dd56f, #28b487);

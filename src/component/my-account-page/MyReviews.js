@@ -40,7 +40,7 @@ export default function MyReviews() {
     e.preventDefault();
     const response = await request('DELETE', `/api/v1/reviews/${id}`);
     if ((response.status = 204)) {
-      showAlert('success', 'deleted review', 1.5);
+      showAlert('success', 'review deleted', 1.5);
       setTimeout(() => {
         document.location.reload();
       }, 1500);

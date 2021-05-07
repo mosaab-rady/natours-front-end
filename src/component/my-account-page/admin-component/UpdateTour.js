@@ -1,19 +1,29 @@
-import React, { useState } from 'react';
-import '../../../css/createtour.css';
+import React, { useContext, useState } from 'react';
+import { myContext } from '../../../Context';
 import { createUpdateTour } from '../../../js/createTour';
 
-export default function CreateTour() {
-  const [imageCover, setImageCover] = useState('default-tour.jpg');
-  const [img_1, setImg_1] = useState('default-tour.jpg');
-  const [img_2, setImg_2] = useState('default-tour.jpg');
-  const [img_3, setImg_3] = useState('default-tour.jpg');
-  const [num, setNum] = useState(0);
+export default function UpdateTour({ id }) {
+  const { allTours } = useContext(myContext);
+  const tour = allTours.find((tour) => tour._id === id);
+  const [num, setNum] = useState(tour.locations.length);
 
-  // make an array to loop throw to show the number of inputs the user want
   let locations = [];
   for (let i = 0; i < num; i++) {
     locations.push(i);
   }
+
+  const [imageCover, setImageCover] = useState(
+    `http://localhost:5000/public/img/tours/${tour.imageCover}`
+  );
+  const [img_1, setImg_1] = useState(
+    `http://localhost:5000/public/img/tours/${tour.images[0]}`
+  );
+  const [img_2, setImg_2] = useState(
+    `http://localhost:5000/public/img/tours/${tour.images[1]}`
+  );
+  const [img_3, setImg_3] = useState(
+    `http://localhost:5000/public/img/tours/${tour.images[2]}`
+  );
 
   const handlePhoto = (img) => (e) => {
     e.preventDefault();
@@ -31,7 +41,7 @@ export default function CreateTour() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    createUpdateTour(e, 'create');
+    createUpdateTour(e, 'update', tour._id);
   };
 
   return (
@@ -42,7 +52,14 @@ export default function CreateTour() {
     >
       <div className='input-group'>
         <label htmlFor='name'>name</label>
-        <input type='text' required name='name' id='name' minLength='5' />
+        <input
+          type='text'
+          required
+          name='name'
+          id='name'
+          defaultValue={tour.name}
+          minLength='5'
+        />
       </div>
       <div className='section-input'>
         <div className='input-group'>
@@ -54,6 +71,7 @@ export default function CreateTour() {
             id='duration'
             minLength='1'
             min='1'
+            defaultValue={tour.duration}
           />
         </div>
         <div className='input-group'>
@@ -65,6 +83,7 @@ export default function CreateTour() {
             id='maxGroupSize'
             minLength='1'
             min='1'
+            defaultValue={tour.maxGroupSize}
           />
         </div>
         <div className='input-group'>
@@ -76,6 +95,7 @@ export default function CreateTour() {
             id='difficulty'
             minLength='1'
             min='1'
+            defaultValue={tour.difficulty}
           />
           <datalist id='list'>
             <option value='easy'></option>
@@ -92,6 +112,7 @@ export default function CreateTour() {
             id='price'
             minLength='1'
             min='1'
+            defaultValue={tour.price}
           />
         </div>
       </div>
@@ -102,20 +123,41 @@ export default function CreateTour() {
           id='summary'
           required
           minLength='10'
+          defaultValue={tour.summary}
         ></textarea>
       </div>
       <div className='input-group description'>
         <label htmlFor='description' minLength='10'>
           description
         </label>
-        <textarea name='description' id='description' rows='6'></textarea>
+        <textarea
+          name='description'
+          id='description'
+          rows='6'
+          defaultValue={tour.description}
+        ></textarea>
       </div>
       <div className='input-group'>
         <label htmlFor='startDates'>start dates</label>
         <div className='start-dates__input'>
-          <input type='datetime-local' name='startDates_1' id='startDates' />
-          <input type='datetime-local' name='startDates_2' id='startDates' />
-          <input type='datetime-local' name='startDates_3' id='startDates' />
+          <input
+            type='datetime-local'
+            name='startDates_1'
+            id='startDates'
+            // defaultValue={tour.startDates[0]}
+          />
+          <input
+            type='datetime-local'
+            name='startDates_2'
+            id='startDates'
+            // defaultValue={tour.startDates[1]}
+          />
+          <input
+            type='datetime-local'
+            // defaultValue={tour.startDates[2]}
+            name='startDates_3'
+            id='startDates'
+          />
         </div>
       </div>
       <div className='startLocation'>
@@ -127,6 +169,7 @@ export default function CreateTour() {
             name='description_startLocation'
             id='description-location'
             minLength='1'
+            defaultValue={tour.startLocation.description}
           />
         </div>
         <div className='input-group'>
@@ -136,6 +179,7 @@ export default function CreateTour() {
             name='address_startLocation'
             id='address'
             minLength='1'
+            defaultValue={tour.startLocation.address}
           />
         </div>
         <div className='input-group'>
@@ -147,6 +191,7 @@ export default function CreateTour() {
               id='lag'
               step='0.00000000001'
               placeholder='longitude'
+              defaultValue={tour.startLocation.coordinates[0]}
             />
             <input
               type='number'
@@ -154,6 +199,7 @@ export default function CreateTour() {
               id='lat'
               step='0.00000000001'
               placeholder='latitude'
+              defaultValue={tour.startLocation.coordinates[1]}
             />
           </div>
         </div>
@@ -166,10 +212,11 @@ export default function CreateTour() {
           <input
             type='number'
             name='num'
+            defaultValue={num}
             onChange={(e) => setNum(e.target.value)}
           />
         </div>
-        {locations.map((num, i) => {
+        {locations.map((location, i) => {
           return (
             <div key={i} className='locations__location-container'>
               <h2>location {i + 1}: </h2>
@@ -180,6 +227,9 @@ export default function CreateTour() {
                   name={`description_location${i + 1}`}
                   id={`description_location${i + 1}`}
                   minLength='1'
+                  defaultValue={
+                    tour.locations[i] ? tour.locations[i].description : ''
+                  }
                 />
               </div>
 
@@ -192,6 +242,9 @@ export default function CreateTour() {
                     id={`lag_location${i + 1}`}
                     step='0.00000000001'
                     placeholder='longitude'
+                    defaultValue={
+                      tour.locations[i] ? tour.locations[i].coordinates[0] : ''
+                    }
                   />
                   <input
                     type='number'
@@ -199,6 +252,9 @@ export default function CreateTour() {
                     id={`lat_location${i + 1}`}
                     step='0.00000000001'
                     placeholder='latitude'
+                    defaultValue={
+                      tour.locations[i] ? tour.locations[i].coordinates[1] : ''
+                    }
                   />
                 </div>
               </div>
@@ -210,6 +266,7 @@ export default function CreateTour() {
                   id={`day_location${i + 1}`}
                   minLength='1'
                   min='1'
+                  defaultValue={tour.locations[i] ? tour.locations[i].day : ''}
                 />
               </div>
             </div>
@@ -219,9 +276,13 @@ export default function CreateTour() {
       {/*  */}
 
       <div className='input-group__imageCover-container'>
-        <img src={imageCover} alt='' className='img-container__img' />
+        <img
+          src={imageCover ? imageCover : 'default-tour.jpg'}
+          alt=''
+          className='img-container__img'
+        />
         <label htmlFor='imageCover' className='input-img photo-btn'>
-          Cover Image
+          new Cover Image
         </label>
         <input
           type='file'
@@ -233,9 +294,13 @@ export default function CreateTour() {
       </div>
       <div className='input-group__images-container'>
         <div className='images-container__img-container'>
-          <img src={img_1} alt='' className='img-container__img_1' />
+          <img
+            src={img_1 ? img_1 : 'default-tour.jpg'}
+            alt=''
+            className='img-container__img_1'
+          />
           <label htmlFor='img_1' className='input-img photo-btn'>
-            first image
+            choose new image
           </label>
           <input
             type='file'
@@ -246,9 +311,13 @@ export default function CreateTour() {
           />
         </div>
         <div className='images-container__img-container'>
-          <img src={img_2} alt='' className='img-container__img_2' />
+          <img
+            src={img_2 ? img_2 : 'default-tour.jpg'}
+            alt=''
+            className='img-container__img_2'
+          />
           <label htmlFor='img_2' className='input-img photo-btn'>
-            socend image
+            choose new image
           </label>
           <input
             type='file'
@@ -259,9 +328,13 @@ export default function CreateTour() {
           />
         </div>
         <div className='images-container__img-container'>
-          <img src={img_3} alt='' className='img-container__img_3' />
+          <img
+            src={img_3 ? img_3 : 'default-tour.jpg'}
+            alt=''
+            className='img-container__img_3'
+          />
           <label htmlFor='img_3' className='input-img photo-btn'>
-            third image
+            choose new image
           </label>
           <input
             type='file'
@@ -272,7 +345,7 @@ export default function CreateTour() {
           />
         </div>
       </div>
-      <button className='create-tour__btn'>create tour</button>
+      <button className='create-tour__btn'>update tour</button>
     </form>
   );
 }
