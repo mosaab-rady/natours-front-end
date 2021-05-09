@@ -1,0 +1,63 @@
+.users-container {
+  padding: 4rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 5rem;
+}
+
+.users-container___user {
+  padding: 2rem;
+  background-color: #fbfbfb;
+  box-shadow: 0 1.5rem 4rem rgb(182, 202, 189);
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+}
+
+.user-container__user__header {
+  display: flex;
+  align-items: center;
+}
+
+.update-role {
+  display: flex;
+  flex-direction: column;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.update-role__radio-group {
+  display: flex;
+  align-items: center;
+  margin-left: 2rem;
+}
+
+.update-role__radio-group input {
+  width: 1rem;
+  margin-right: 1rem;
+}
+
+.update-user__btn,
+.delete-user__btn {
+  width: 9rem;
+  font-size: 1rem;
+  background-color: rgb(85, 197, 122);
+  border: 0;
+  color: #fff;
+  padding: 1rem 0rem;
+  border-radius: 4rem;
+  text-transform: uppercase;
+  margin: 0 auto;
+  cursor: pointer;
+}
+
+.update-user__btn {
+  margin-top: 2rem;
+}
+
+.update-user__btn:hover,
+.delete-user__btn:hover {
+  transition: all 0.1s linear;
+  transform: translateY(-3px);
+}

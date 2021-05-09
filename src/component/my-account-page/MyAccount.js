@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import '../../css/myaccount.css';
 import {
   FiSettings,
@@ -21,12 +21,29 @@ import ManageTours from './admin-component/ManageTours';
 import ManageUsers from './admin-component/ManageUsers';
 import ManageReviews from './admin-component/ManageReviews';
 import ManageBookings from './admin-component/ManageBookings';
+import { request } from '../../js/axios';
 
 export default function MyAccount() {
   const { currentUser } = useContext(myContext);
   const [toggle, setToggle] = useState(false);
   const [component, setComponent] = useState(<Settings />);
   const [active, setActive] = useState('settings');
+  const [users, setUsers] = useState();
+
+  useEffect(() => {
+    if (currentUser) {
+      if (currentUser.role === 'admin') {
+        const getUsers = async () => {
+          const response = await request('GET', '/api/v1/users');
+          setUsers(response.data.data.users);
+        };
+        getUsers();
+      }
+    }
+    return () => {
+      setUsers('');
+    };
+  }, [currentUser]);
 
   if (currentUser) {
     document.title = `Natours | ${currentUser.name} `;
@@ -134,7 +151,7 @@ export default function MyAccount() {
                   }
                   onClick={() => {
                     setToggle(false);
-                    setComponent(<ManageUsers />);
+                    setComponent(<ManageUsers users={users} />);
                     setActive('manageUsers');
                   }}
                 >

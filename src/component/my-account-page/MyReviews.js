@@ -108,6 +108,10 @@ export default function MyReviews() {
       return <div className='my-reviews'>you don`t have reviews</div>;
     }
   } else {
-    return <div className='my-reviews'>loading....</div>;
+    return (
+      <div className='my-reviews'>
+        <div className='loading'></div>
+      </div>
+    );
   }
 }
