@@ -3,16 +3,28 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  gap: 5rem;
+  /* column-gap: 5rem; */
 }
 
 .users-container___user {
   padding: 2rem;
+  width: 20rem;
   background-color: #fbfbfb;
   box-shadow: 0 1.5rem 4rem rgb(182, 202, 189);
   border-radius: 5px;
   display: flex;
   flex-direction: column;
+  margin-bottom: 4rem;
+}
+
+@media screen and (max-width: 500px) {
+  .users-container {
+    padding: 4rem 0rem;
+    justify-content: center;
+  }
+  .users-container___user {
+    width: 95%;
+  }
 }
 
 .user-container__user__header {
@@ -25,6 +37,11 @@
   flex-direction: column;
   margin-top: 2rem;
   margin-bottom: 2rem;
+}
+
+.update-user__form {
+  display: flex;
+  flex-direction: column;
 }
 
 .update-role__radio-group {
@@ -53,7 +70,8 @@
 }
 
 .update-user__btn {
-  margin-top: 2rem;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
 }
 
 .update-user__btn:hover,

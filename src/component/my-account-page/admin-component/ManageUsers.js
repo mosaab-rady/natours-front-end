@@ -4,23 +4,26 @@ import { request } from '../../../js/axios';
 import { showAlert } from '../../../js/alert';
 
 export default function ManageUsers({ users }) {
-  // const handleUpdateUser = (id) => async (e) => {
-  //   e.preventDefault();
-  //   console.log(e.target.role.value);
-  //   console.log(id);
-  //   // const response = await request('PATCH', `/api/v1/users/${id}`);
-  //   // if (response) {
-  //   //   if (response.data.status === 'success') {
-  //   //     showAlert('success', 'user updated', 1.5);
-  //   //   }
-  //   //   if (response.data.status !== 'success') {
-  //   //     showAlert('fail', response.data.message, 3);
-  //   //   }
-  //   // }
-  // };
+  const handleUpdateUser = (id) => async (e) => {
+    e.preventDefault();
+    // console.log(e.target.role.value);
+    // console.log(id);
+    const response = await request('PATCH', `/api/v1/users/${id}`, {
+      role: e.target.role.value,
+    });
+    if (response) {
+      if (response.data.status === 'success') {
+        showAlert('success', 'user updated', 1.5);
+      }
+      if (response.data.status !== 'success') {
+        showAlert('fail', response.data.message, 3);
+      }
+    }
+  };
 
   const deleteUser = (id) => async (e) => {
     e.preventDefault();
+    // console.log(id);
     const response = await request('DELETE', `/api/v1/users/${id}`);
     if ((response.status = 204)) {
       showAlert('success', 'user deleted', 1.5);
@@ -53,14 +56,28 @@ export default function ManageUsers({ users }) {
                 <label>role</label>
                 <input value={user.role || ''} readOnly></input>
               </div>
-              <form>
+              <form
+                className='update-user__form'
+                onSubmit={handleUpdateUser(user._id)}
+              >
                 <label>make {user.name.split(' ')[0]}</label>
-                 <input type="radio" id="male" name="gender" value="male">
-                                  <label for="male">Male</label><br>
-                    <input type="radio" id="female" name="gender" value="female">
-                    <label for="female">Female</label><br>
-                    <input type="radio" id="other" name="gender" value="other">
-                    <label for="other">Other</label>
+                <div className='update-role__radio-group'>
+                  <input type='radio' value='user' name='role' required />
+                  <label>normal user</label>
+                </div>
+                <div className='update-role__radio-group'>
+                  <input type='radio' value='guide' name='role' />
+                  <label>guide</label>
+                </div>
+                <div className='update-role__radio-group'>
+                  <input type='radio' value='lead-guide' name='role' />
+                  <label>lead-guide</label>
+                </div>
+                <div className='update-role__radio-group'>
+                  <input type='radio' value='admin' name='role' />
+                  <label>admin</label>
+                </div>
+                <button className='update-user__btn'>change role</button>
               </form>
 
               <button
