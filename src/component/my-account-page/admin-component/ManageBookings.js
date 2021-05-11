@@ -1,4 +1,5 @@
 import React from 'react';
+// import { myContext } from '../../../Context';
 
 export default function ManageBookings() {
   return (

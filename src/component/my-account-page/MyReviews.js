@@ -105,7 +105,11 @@ export default function MyReviews() {
       showAlert(response.data.status, response.data.message, 5);
       return;
     } else {
-      return <div className='my-reviews'>you don`t have reviews</div>;
+      return (
+        <div className='my-reviews'>
+          <h1>you don`t have reviews</h1>
+        </div>
+      );
     }
   } else {
     return (
