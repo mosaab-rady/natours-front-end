@@ -8,6 +8,7 @@ import Map from './Map';
 // import { showAlert } from '../js/alert';
 import { myContext } from '../Context';
 import { useParams } from 'react-router';
+import { bookTour } from '../js/stripe';
 
 function TourDetails() {
   // const { state } = useLocation();
@@ -33,6 +34,11 @@ function TourDetails() {
     };
     getReviews();
   }, [tour]);
+
+  // handle booking
+  const handleBookTour = (id) => {
+    bookTour(id);
+  };
 
   // if there is a response
   if (tour) {
@@ -199,7 +205,12 @@ function TourDetails() {
             </p>
           </div>
           {currentUser ? (
-            <button className='booking-btn'>book tour now!</button>
+            <button
+              className='booking-btn'
+              onClick={() => handleBookTour(tour._id)}
+            >
+              book tour now!
+            </button>
           ) : (
             <button
               onClick={() => (window.location.href = '/login')}
