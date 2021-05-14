@@ -2,7 +2,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 2rem;
+  gap: 3rem;
   padding: 4rem 0;
 }
 
@@ -19,8 +19,8 @@
 
 @media screen and (max-width: 500px) {
   .my-reviews__review-container {
-    width: 100%;
-    margin: 0 2rem;
+    width: 90%;
+    /* margin: 0 2rem; */
   }
 }
 
@@ -55,7 +55,7 @@
 }
 
 .my-reviews__review-container button {
-  width: auto;
+  width: 10rem;
   font-size: 1rem;
   background-color: #55c57a;
   border: 0;
@@ -63,7 +63,7 @@
   padding: 0.5rem 0rem;
   border-radius: 4rem;
   text-transform: uppercase;
-  margin: 0.5rem;
+  margin: 0.5rem auto;
 }
 .my-reviews__review-container button:hover {
   transition: all 0.1s linear;

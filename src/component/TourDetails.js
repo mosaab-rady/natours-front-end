@@ -106,7 +106,7 @@ function TourDetails() {
                     />
                     <p className='overview-box__group__el__p'>
                       <span>
-                        {guide.role === 'lead guide'
+                        {guide.role === 'lead-guide'
                           ? 'lead guide'
                           : 'tour guide'}
                       </span>

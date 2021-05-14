@@ -63,6 +63,7 @@ export default function MyReviews() {
                 key={review.id}
               >
                 <h1>{review.tour.name} tour</h1>
+                <h5>{review.createdAt.split('T')[0]}</h5>
                 <textarea
                   name='review'
                   id='review'

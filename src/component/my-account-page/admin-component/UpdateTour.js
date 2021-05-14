@@ -1,11 +1,30 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { AiOutlineClose } from 'react-icons/ai';
 import { myContext } from '../../../Context';
+import { showAlert } from '../../../js/alert';
+import { request } from '../../../js/axios';
 import { createUpdateTour } from '../../../js/createTour';
 
 export default function UpdateTour({ id }) {
   const { allTours } = useContext(myContext);
   const tour = allTours.find((tour) => tour._id === id);
   const [num, setNum] = useState(tour.locations.length);
+  const [users, setUsers] = useState([]);
+  const [guides, setGuides] = useState(tour.guides);
+
+  useEffect(() => {
+    const getUsers = async () => {
+      const response = await request('GET', '/api/v1/users');
+      if (response) {
+        if (response.data.status === 'success') {
+          setUsers(response.data.data.users);
+        } else if (response.data.status !== 'success') {
+          showAlert('fail', response.data.message, 3);
+        }
+      }
+    };
+    getUsers();
+  }, []);
 
   let locations = [];
   for (let i = 0; i < num; i++) {
@@ -41,8 +60,10 @@ export default function UpdateTour({ id }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    createUpdateTour(e, 'update', tour._id);
+    createUpdateTour(e, 'update', tour._id, guides);
   };
+
+  const userGuides = users.filter((user) => guides.includes(user._id));
 
   return (
     <form
@@ -137,6 +158,61 @@ export default function UpdateTour({ id }) {
           defaultValue={tour.description}
         ></textarea>
       </div>
+
+      <div className='input-group guide-input__group '>
+        <label htmlFor='guide'>guides</label>
+        <select
+          name='guide'
+          id='guide'
+          onChange={(e) =>
+            e.target.value === 'no guide'
+              ? setGuides([])
+              : setGuides(Array.from(new Set([...guides, e.target.value])))
+          }
+          className='guide-input__group__select'
+        >
+          <option value='no guide'>no guides</option>
+          {users.length >= 1 ? (
+            users
+              .filter((user) => user.role !== 'user' && user.role !== 'admin')
+              .map((user, i) => {
+                return (
+                  <option value={user._id} key={i}>
+                    {user.name.split(' ')[0]}----
+                    {user.role}
+                  </option>
+                );
+              })
+          ) : (
+            <option>no users</option>
+          )}
+        </select>
+        <div className='guides-info'>
+          {userGuides.map((guide, i) => {
+            return (
+              <div className='guide-info'>
+                <div className='guide-info__header'>
+                  <img
+                    className='guide-info__img'
+                    src={`http://localhost:5000/public/img/users/${guide.photo}`}
+                    alt=''
+                  />
+                  <h3>{guide.name}</h3>
+                  <AiOutlineClose
+                    className='remove-guide'
+                    onClick={() =>
+                      setGuides(guides.filter((id) => id !== guide._id))
+                    }
+                  />
+                </div>
+                <h4>{guide.role}</h4>
+                <h5>{guide.email}</h5>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
       <div className='input-group'>
         <label htmlFor='startDates'>start dates</label>
         <div className='start-dates__input'>

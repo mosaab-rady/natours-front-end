@@ -1,6 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../../../css/createtour.css';
+import { showAlert } from '../../../js/alert';
+import { request } from '../../../js/axios';
 import { createUpdateTour } from '../../../js/createTour';
+
+import { AiOutlineClose } from 'react-icons/ai';
 
 export default function CreateTour() {
   const [imageCover, setImageCover] = useState('default-tour.jpg');
@@ -8,6 +12,23 @@ export default function CreateTour() {
   const [img_2, setImg_2] = useState('default-tour.jpg');
   const [img_3, setImg_3] = useState('default-tour.jpg');
   const [num, setNum] = useState(0);
+  const [users, setUsers] = useState([]);
+  const [guides, setGuides] = useState([]);
+  // const [userGuides, setUserGuides] = useState([]);
+
+  useEffect(() => {
+    const getUsers = async () => {
+      const response = await request('GET', '/api/v1/users');
+      if (response) {
+        if (response.data.status === 'success') {
+          setUsers(response.data.data.users);
+        } else if (response.data.status !== 'success') {
+          showAlert('fail', response.data.message, 3);
+        }
+      }
+    };
+    getUsers();
+  }, []);
 
   // make an array to loop throw to show the number of inputs the user want
   let locations = [];
@@ -31,8 +52,13 @@ export default function CreateTour() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    createUpdateTour(e, 'create');
+
+    createUpdateTour(e, 'create', guides);
   };
+
+  console.log(guides);
+  const userGuides = users.filter((user) => guides.includes(user._id));
+  console.log(userGuides);
 
   return (
     <form
@@ -110,6 +136,59 @@ export default function CreateTour() {
         </label>
         <textarea name='description' id='description' rows='6'></textarea>
       </div>
+      <div className='input-group guide-input__group '>
+        <label htmlFor='guide'>guides</label>
+        <select
+          name='guide'
+          id='guide'
+          onChange={(e) =>
+            e.target.value === 'no guide'
+              ? setGuides([])
+              : setGuides(Array.from(new Set([...guides, e.target.value])))
+          }
+          className='guide-input__group__select'
+        >
+          <option value='no guide'>no guides</option>
+          {users.length >= 1 ? (
+            users
+              .filter((user) => user.role !== 'user' && user.role !== 'admin')
+              .map((user, i) => {
+                return (
+                  <option value={user._id} key={i}>
+                    {user.name.split(' ')[0]}----
+                    {user.role}
+                  </option>
+                );
+              })
+          ) : (
+            <option>no users</option>
+          )}
+        </select>
+        <div className='guides-info'>
+          {userGuides.map((guide, i) => {
+            return (
+              <div className='guide-info'>
+                <div className='guide-info__header'>
+                  <img
+                    className='guide-info__img'
+                    src={`http://localhost:5000/public/img/users/${guide.photo}`}
+                    alt=''
+                  />
+                  <h3>{guide.name}</h3>
+                  <AiOutlineClose
+                    className='remove-guide'
+                    onClick={() =>
+                      setGuides(guides.filter((id) => id !== guide._id))
+                    }
+                  />
+                </div>
+                <h4>{guide.role}</h4>
+                <h5>{guide.email}</h5>
+              </div>
+            );
+          })}
+        </div>
+      </div>
       <div className='input-group'>
         <label htmlFor='startDates'>start dates</label>
         <div className='start-dates__input'>
@@ -166,6 +245,7 @@ export default function CreateTour() {
           <input
             type='number'
             name='num'
+            min='0'
             onChange={(e) => setNum(e.target.value)}
           />
         </div>

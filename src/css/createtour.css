@@ -55,6 +55,54 @@ textarea:focus:invalid {
   scrollbar-width: none; /* Firefox */
 }
 
+.guide-input__group label {
+  margin-right: 3rem;
+}
+
+.guide-input__group__select {
+  padding: 0.5rem 1rem;
+  font-size: 1.5rem;
+  font-family: inherit;
+  border: none;
+  background-color: #e2e2e2;
+  color: #777;
+  /* color: #f7f7f7; */
+  /* border: none;
+  background-image: linear-gradient(to right, #7dd56f, #28b45e); */
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.guides-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3rem;
+  margin-top: 3rem;
+}
+
+.guide-info {
+  background: #f7f7f7;
+  padding: 1rem;
+  border-radius: 5px;
+}
+
+.guide-info__header {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.guide-info__img {
+  height: 2rem;
+  width: 2rem;
+  border-radius: 50%;
+  /* margin-right: 2rem; */
+}
+
+.remove-guide {
+  cursor: pointer;
+}
+
 .start-dates__input {
   display: flex;
   gap: 1rem;

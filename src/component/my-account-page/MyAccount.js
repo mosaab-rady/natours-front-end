@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import '../../css/myaccount.css';
 import {
   FiSettings,
@@ -21,29 +21,19 @@ import ManageTours from './admin-component/ManageTours';
 import ManageUsers from './admin-component/ManageUsers';
 import ManageReviews from './admin-component/ManageReviews';
 import ManageBookings from './admin-component/ManageBookings';
-import { request } from '../../js/axios';
 
 export default function MyAccount() {
   const { currentUser } = useContext(myContext);
   const [toggle, setToggle] = useState(false);
   const [component, setComponent] = useState(<Settings />);
   const [active, setActive] = useState('settings');
-  const [users, setUsers] = useState();
 
-  useEffect(() => {
-    if (currentUser) {
-      if (currentUser.role === 'admin') {
-        const getUsers = async () => {
-          const response = await request('GET', '/api/v1/users');
-          setUsers(response.data.data.users);
-        };
-        getUsers();
-      }
-    }
-    return () => {
-      setUsers('');
-    };
-  }, [currentUser]);
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'auto',
+    });
+  };
 
   if (currentUser) {
     document.title = `Natours | ${currentUser.name} `;
@@ -74,6 +64,7 @@ export default function MyAccount() {
                 setToggle(false);
                 setComponent(<Settings />);
                 setActive('settings');
+                scrollToTop();
               }}
             >
               <FiSettings className='side-nav__el__icon' />
@@ -88,6 +79,7 @@ export default function MyAccount() {
                 setToggle(false);
                 setComponent(<MyBookings />);
                 setActive('MyBookings');
+                scrollToTop();
               }}
             >
               <FiBriefcase className='side-nav__el__icon' />
@@ -102,6 +94,7 @@ export default function MyAccount() {
                 setToggle(false);
                 setComponent(<MyReviews />);
                 setActive('MyReviews');
+                scrollToTop();
               }}
             >
               <BsStar className='side-nav__el__icon' />
@@ -116,6 +109,7 @@ export default function MyAccount() {
                 setToggle(false);
                 setComponent(<MyBilling />);
                 setActive('MyBilling');
+                scrollToTop();
               }}
             >
               <FiCreditCard className='side-nav__el__icon' />
@@ -137,6 +131,7 @@ export default function MyAccount() {
                     setToggle(false);
                     setComponent(<ManageTours />);
                     setActive('manageTours');
+                    scrollToTop();
                   }}
                 >
                   <FiMap className='side-nav__el__icon' />
@@ -151,8 +146,9 @@ export default function MyAccount() {
                   }
                   onClick={() => {
                     setToggle(false);
-                    setComponent(<ManageUsers users={users} />);
+                    setComponent(<ManageUsers />);
                     setActive('manageUsers');
+                    scrollToTop();
                   }}
                 >
                   <FiUsers className='side-nav__el__icon' />
@@ -169,6 +165,7 @@ export default function MyAccount() {
                     setToggle(false);
                     setComponent(<ManageReviews />);
                     setActive('manageReviews');
+                    scrollToTop();
                   }}
                 >
                   <BsStar className='side-nav__el__icon' />
@@ -185,6 +182,7 @@ export default function MyAccount() {
                     setToggle(false);
                     setComponent(<ManageBookings />);
                     setActive('manageBookings');
+                    scrollToTop();
                   }}
                 >
                   <FiBriefcase className='side-nav__el__icon' />

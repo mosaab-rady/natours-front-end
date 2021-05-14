@@ -1,9 +1,28 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import '../../../css/manageusers.css';
 import { request } from '../../../js/axios';
 import { showAlert } from '../../../js/alert';
+import { myContext } from '../../../Context';
 
-export default function ManageUsers({ users }) {
+export default function ManageUsers() {
+  const { currentUser } = useContext(myContext);
+  const [users, setUsers] = useState();
+
+  useEffect(() => {
+    if (currentUser) {
+      if (currentUser.role === 'admin') {
+        const getUsers = async () => {
+          const response = await request('GET', '/api/v1/users');
+          setUsers(response.data.data.users);
+        };
+        getUsers();
+      }
+    }
+    return () => {
+      setUsers('');
+    };
+  }, [currentUser]);
+
   const handleUpdateUser = (id) => async (e) => {
     e.preventDefault();
     // console.log(e.target.role.value);
@@ -21,12 +40,12 @@ export default function ManageUsers({ users }) {
     }
   };
 
-  const deleteUser = (id) => async (e) => {
-    e.preventDefault();
+  const deleteUser = async (id) => {
     // console.log(id);
     const response = await request('DELETE', `/api/v1/users/${id}`);
     if ((response.status = 204)) {
       showAlert('success', 'user deleted', 1.5);
+      setUsers(users.filter((user) => user._id !== id));
     }
     if (response.status !== 204) {
       showAlert('fail', response.data.message, 3);
@@ -83,7 +102,7 @@ export default function ManageUsers({ users }) {
 
                 <button
                   className='delete-user__btn'
-                  onClick={deleteUser(user._id)}
+                  onClick={() => deleteUser(user._id)}
                 >
                   delete user
                 </button>
