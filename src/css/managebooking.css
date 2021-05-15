@@ -1,33 +1,3 @@
-/* .manage-bookings {
-  display: flex;
-  flex-direction: column;
-  padding: 4rem 2rem;
-}
-
-.booking-container {
-  display: flex;
-  flex-wrap: wrap;
-  border: 0.5px solid #177171;
-  align-items: center;
-  padding: 1rem 0;
-}
-
-.booking-container__group {
-  display: flex;
-  border: 0.5px solid #777;
-  flex-direction: column;
-  width: auto;
-  height: 5rem;
-  padding: 0 0.5rem;
-  justify-content: center;
-}
-
-.booking-container__group h2 {
-  border-bottom: 0.1px solid rgb(195, 192, 192);
-  text-transform: capitalize;
-  font-size: 1.2rem;
-} */
-
 table,
 th,
 td {

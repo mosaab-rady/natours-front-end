@@ -71,7 +71,10 @@ export default function ManageReviews() {
           {filterReviews.length >= 1 ? (
             filterReviews.map((review, i) => {
               return (
-                <div className='my-reviews__review-container' key={i}>
+                <div
+                  className='my-reviews__review-container manage-reviews__review-container '
+                  key={i}
+                >
                   <div className='review-user'>
                     <img
                       className='review-user__img'

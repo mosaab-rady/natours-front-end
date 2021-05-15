@@ -95,8 +95,10 @@ export default function MyReviews() {
                     defaultValue={review.rating}
                   />
                 </div>
-                <button>update</button>
-                <button onClick={deleteReview(review.id)}>delete</button>
+                <div className='my-reviews__btns'>
+                  <button>update</button>
+                  <button onClick={deleteReview(review.id)}>delete</button>
+                </div>
               </form>
             );
           })}

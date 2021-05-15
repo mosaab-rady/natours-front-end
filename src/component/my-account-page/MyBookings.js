@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { showAlert } from '../../js/alert';
 import { request } from '../../js/axios';
 import SingleTour from '../SingleTour';
+import '../../css/mybookings.css';
 
 export default function MyBookings() {
   const [tours, setTours] = useState();
@@ -24,7 +25,7 @@ export default function MyBookings() {
   if (tours) {
     if (tours.length >= 1) {
       return (
-        <div className='tours_container'>
+        <div className='tours_container bookings-container '>
           {tours.map((tour, i) => (
             <SingleTour
               key={i}

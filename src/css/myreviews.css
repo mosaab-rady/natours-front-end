@@ -3,21 +3,21 @@
   flex-wrap: wrap;
   justify-content: center;
   gap: 3rem;
-  padding: 4rem 0;
+  padding: 4rem 1rem;
 }
 
 .my-reviews__review-container {
   position: relative;
   padding: 2rem;
-  width: 18rem;
+  width: 22rem;
   border-radius: 5px;
   box-shadow: 0 1.5rem 4rem rgb(0 0 0 / 25%);
-  background: #fbfbfb;
+  background: #d4f8bb;
   display: flex;
   flex-direction: column;
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 400px) {
   .my-reviews__review-container {
     width: 90%;
     /* margin: 0 2rem; */
@@ -54,16 +54,24 @@
   scrollbar-width: none; /* Firefox */
 }
 
+.my-reviews__btns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
 .my-reviews__review-container button {
-  width: 10rem;
+  /* width: 10rem; */
   font-size: 1rem;
   background-color: #55c57a;
   border: 0;
   color: #fff;
-  padding: 0.5rem 0rem;
+  padding: 0.5rem 2rem;
   border-radius: 4rem;
   text-transform: uppercase;
-  margin: 0.5rem auto;
+  /* margin: 0.5rem auto; */
 }
 .my-reviews__review-container button:hover {
   transition: all 0.1s linear;

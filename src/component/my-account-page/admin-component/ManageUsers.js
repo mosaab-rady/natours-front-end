@@ -97,15 +97,16 @@ export default function ManageUsers() {
                     <input type='radio' value='admin' name='role' />
                     <label>admin</label>
                   </div>
-                  <button className='update-user__btn'>change role</button>
+                  <div className='manage-users__btns'>
+                    <button className='update-user__btn'>update</button>
+                    <button
+                      className='delete-user__btn'
+                      onClick={() => deleteUser(user._id)}
+                    >
+                      delete
+                    </button>
+                  </div>
                 </form>
-
-                <button
-                  className='delete-user__btn'
-                  onClick={() => deleteUser(user._id)}
-                >
-                  delete user
-                </button>
               </div>
             );
           })}

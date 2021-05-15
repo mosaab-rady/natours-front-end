@@ -17,6 +17,12 @@
   background-color: rgb(245, 253, 242);
 }
 
+@media screen and (max-width: 400px) {
+  .App {
+    margin: 2rem 1rem;
+  }
+}
+
 /* nav bar */
 .nav_container {
   /* margin: 2rem 2rem 0 2rem; */
@@ -27,6 +33,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  transition: all 0.3s linear;
 }
 
 .btn_all_tours {
@@ -78,31 +85,41 @@
 @media screen and (max-width: 850px) {
   .hide_nav_links {
     position: absolute;
-    top: 5rem;
+    /* top: 5rem;
     left: 4rem;
-    right: 4rem;
-    margin-top: -300px;
-    display: flex;
+    right: 4rem; */
+    /* margin-top: -300px; */
+    transition: all 0.3s linear;
+    height: 0;
+    margin-top: -50px;
+    overflow: hidden;
+    /* display: flex;
     flex-direction: column;
-    align-items: center;
-    /* transition: all 0.5s linear; */
+    align-items: center; */
   }
   .show_nav_links {
     position: absolute;
     top: 5rem;
     left: 4rem;
     right: 4rem;
+    height: auto;
+    /* width: 100%; */
     background-color: rgb(138, 133, 133);
     display: flex;
     flex-direction: column;
     align-items: center;
-    transition: all 0.5s linear;
+    transition: all 0.3s linear;
     z-index: 100;
   }
 }
 @media screen and (max-width: 450px) {
   .btn_all_tours {
     margin-left: 1rem;
+  }
+  .show_nav_links {
+    left: 0;
+    right: 0;
+    width: 100%;
   }
 }
 #nav_icon {
@@ -157,7 +174,7 @@
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   grid-template-rows: auto;
   justify-items: center;
-  gap: 4.2rem;
+  gap: 4rem;
   /* display: flex;
   flex-wrap: wrap;
   gap: 5rem;
@@ -166,14 +183,25 @@
 
 @media screen and (max-width: 500px) {
   .tours_container {
-    padding: 5rem 0rem;
+    padding: 5rem 1rem;
   }
 }
+
 .tour_container {
   height: auto;
   border-radius: 3px;
   box-shadow: 0 1.5rem 4rem rgb(223, 221, 221);
-  width: 95%;
+  /* width: 95%; */
+}
+
+@media screen and (max-width: 400px) {
+  .tours_container {
+    /* width: 95%; */
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  }
+  .tour_container {
+    /* width: 80%; */
+  }
 }
 
 .header_container {

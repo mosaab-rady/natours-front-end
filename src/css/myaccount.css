@@ -180,6 +180,7 @@
   .side-nav {
     width: 0;
     overflow: hidden;
+    border-radius: 5px;
   }
   .show-side-nav {
     width: 70vw;
@@ -207,7 +208,7 @@
 
 @media screen and (max-width: 450px) {
   .me-container {
-    width: 90%;
+    width: 100%;
   }
   /* .me__settings {
     padding: 3rem 2rem;

@@ -167,7 +167,7 @@ export default function CreateTour() {
         <div className='guides-info'>
           {userGuides.map((guide, i) => {
             return (
-              <div className='guide-info'>
+              <div className='guide-info' key={i}>
                 <div className='guide-info__header'>
                   <img
                     className='guide-info__img'

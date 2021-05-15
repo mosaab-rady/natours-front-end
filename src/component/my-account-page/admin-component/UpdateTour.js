@@ -10,7 +10,7 @@ export default function UpdateTour({ id }) {
   const tour = allTours.find((tour) => tour._id === id);
   const [num, setNum] = useState(tour.locations.length);
   const [users, setUsers] = useState([]);
-  const [guides, setGuides] = useState(tour.guides);
+  const [guides, setGuides] = useState(tour.guides.map((guide) => guide._id));
 
   useEffect(() => {
     const getUsers = async () => {
@@ -190,7 +190,7 @@ export default function UpdateTour({ id }) {
         <div className='guides-info'>
           {userGuides.map((guide, i) => {
             return (
-              <div className='guide-info'>
+              <div className='guide-info' key={i}>
                 <div className='guide-info__header'>
                   <img
                     className='guide-info__img'
