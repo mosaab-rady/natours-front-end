@@ -199,9 +199,9 @@
     /* width: 95%; */
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   }
-  .tour_container {
+  /* .tour_container {
     /* width: 80%; */
-  }
+  /* }  */
 }
 
 .header_container {
@@ -552,6 +552,18 @@
   margin-top: -12rem;
 }
 
+/* .add-review__group h1 {
+  color: #f7f7f7;
+  font-family: inherit;
+  font-weight: 100;
+  text-transform: capitalize;
+}
+
+.add-review-icon {
+  width: 2rem;
+  height: 2rem;
+} */
+
 .tour-details__reviews-container {
   display: grid;
   grid-column-gap: 3rem;
@@ -648,6 +660,106 @@
 .active {
   color: #28b487;
 }
+
+.add-review {
+  position: relative;
+  background-color: #f7f7f7;
+  padding: 3rem 1rem 1rem 1rem;
+  margin: 3rem 0;
+  box-shadow: 0 1.5rem 4rem rgb(0 0 0 / 15%);
+  border-radius: 3px;
+  width: 18rem;
+  /* height: 18rem; */
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+}
+
+.hide__add-review {
+  display: none;
+}
+
+.colse-add-review {
+  position: absolute;
+  right: 1.5rem;
+  cursor: pointer;
+}
+
+.input-group__review {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+.input-group__review > textarea {
+  font-size: 1.2rem;
+  font-family: 'Open Sans Condensed', sans-serif;
+  background-color: #f2f2f2;
+  border: none;
+  border-radius: 3px;
+  padding: 0.8rem;
+  /* overflow: hidden; */
+  height: 10rem;
+  /* width: 15rem; */
+}
+
+.input-group__review textarea::-webkit-scrollbar {
+  display: none;
+}
+
+.input-group__review textarea {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+/* .input-group__rating {
+  margin-bottom: 1rem;
+} */
+
+.input-group__rating input {
+  width: 4rem;
+  height: 2rem;
+  margin-left: 1rem;
+}
+
+.add-review button {
+  margin: 0 auto;
+  margin-top: 1rem;
+  /* background-color: #70c38c; */
+  border: 1px solid #777;
+  color: #777;
+  padding: 0.75rem 1rem;
+  border-radius: 4rem;
+  text-transform: uppercase;
+  transition: all 0.3s linear;
+}
+
+.add-review__btn {
+  position: absolute;
+  top: 10rem;
+  right: 3rem;
+
+  cursor: pointer;
+  border: 1px solid #f7f7f7;
+  padding: 0.5rem 1rem;
+  border-radius: 3rem;
+  background: #f7f7f7;
+  text-transform: capitalize;
+  color: #777;
+  font-family: inherit;
+  font-weight: 100;
+  font-size: 1.2rem;
+  transition: all 0.3s linear;
+}
+
+.add-review__btn:hover,
+.add-review button:hover {
+  transform: translateY(-3px);
+  /* background-color: #777; */
+  /* color: #f7f7f7; */
+}
+
+/* end of reviews */
 
 .section-cta {
   width: 75vw;

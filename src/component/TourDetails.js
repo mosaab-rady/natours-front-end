@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { request } from '../js/axios';
-import { AiOutlineCalendar } from 'react-icons/ai';
+import { AiOutlineCalendar, AiOutlineClose } from 'react-icons/ai';
 import { BiTrendingUp, BiUser } from 'react-icons/bi';
 import { BsStar } from 'react-icons/bs';
 import { getMonthYear } from '../js/date';
@@ -9,6 +9,7 @@ import Map from './Map';
 import { myContext } from '../Context';
 import { useParams } from 'react-router';
 import { bookTour } from '../js/stripe';
+import { showAlert } from '../js/alert';
 
 function TourDetails() {
   // const { state } = useLocation();
@@ -20,12 +21,17 @@ function TourDetails() {
 
   const [reviews, setReviews] = useState([]);
 
+  const [hideAddreview, setHideAddReview] = useState('hide__add-review');
+
+  const [map, setMap] = useState('');
+
   const tour = allTours.find((tour) => tour.slug === slug);
   // if (!tour) showAlert('fail', 'tour not found', 3);
 
   useEffect(() => {
     const getReviews = async () => {
       if (tour) {
+        setMap(<Map locations={tour.locations} />);
         const data = await request('GET', `/api/v1/tours/${tour.id}/reviews`);
         if (data.data.status === 'success') {
           setReviews(data.data.data.reviews);
@@ -44,6 +50,27 @@ function TourDetails() {
   if (tour) {
     document.title = `Natours | ${tour.name} `;
     const { month, year } = getMonthYear(tour.startDates[0]);
+
+    const handleAddReview = async (e) => {
+      e.preventDefault();
+      const body = {};
+      body.review = e.target.review.value;
+      body.rating = e.target.rating.value;
+      const response = await request(
+        'POST',
+        `/api/v1/reviews/addreview/${tour._id}`,
+        body
+      );
+      if (response) {
+        if (response.data.status === 'success') {
+          showAlert('success', 'added review', 1.5);
+          setTimeout(() => document.location.reload(), 1500);
+        }
+        if (response.data.status !== 'success') {
+          showAlert('fail', response.data.message, 3);
+        }
+      }
+    };
 
     return (
       <div className='tour_details'>
@@ -138,11 +165,44 @@ function TourDetails() {
             })}
           </div>
         </section>
-        <section className='tour-details__map'>
-          <Map locations={tour.locations} />
-        </section>
+        <section className='tour-details__map'>{map}</section>
         <section className='tour-details__reviews'>
           <div className='tour-details__reviews-container'>
+            <div
+              className={
+                hideAddreview === 'hide__add-review'
+                  ? 'hide__add-review'
+                  : 'show__add-review'
+              }
+            >
+              <form className='add-review' onSubmit={handleAddReview}>
+                <AiOutlineClose
+                  className='colse-add-review'
+                  onClick={() => setHideAddReview('hide__add-review')}
+                />
+                <div className='input-group__review'>
+                  <label htmlFor='add-review__review'>review</label>
+                  <textarea
+                    name='review'
+                    id='add-review__rating'
+                    required
+                  ></textarea>
+                </div>
+                <div className='input-group__rating'>
+                  <label htmlFor='add-review__rating'>rating</label>
+                  <input
+                    type='number'
+                    name='rating'
+                    id='add-review__rating'
+                    min='1'
+                    max='5'
+                    defaultValue='1'
+                    required
+                  />
+                </div>
+                <button>add review</button>
+              </form>
+            </div>
             {reviews.map((review, i) => {
               const userImg = review.user.photo;
               return (
@@ -176,6 +236,12 @@ function TourDetails() {
               );
             })}
           </div>
+          <button
+            className='add-review__btn'
+            onClick={() => setHideAddReview('show__add-review')}
+          >
+            add new review
+          </button>
         </section>
         <section className='section-cta'>
           <div className='section-cta__imgs'>

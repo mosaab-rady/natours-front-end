@@ -58,7 +58,7 @@ export default function ManageReviews() {
           onChange={showReviews}
           className='manage-reviews__select'
         >
-          <option value='allReviews'>all reviews</option>
+          <option value='allReviews'>all reviews ({reviews.length}) </option>
           {allTours.map((tour, i) => {
             return (
               <option value={tour._id} key={i}>
