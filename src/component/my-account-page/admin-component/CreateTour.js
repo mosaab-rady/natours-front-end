@@ -58,8 +58,6 @@ export default function CreateTour() {
 
   console.log(guides);
   const userGuides = users.filter((user) => guides.includes(user._id));
-  console.log(userGuides);
-
   return (
     <form
       className='create-tour-container'

@@ -5,7 +5,6 @@ export async function createUpdateTour(e, type, id, guides) {
   // console.log(e.target);
 
   const tourGuides = guides;
-  console.log(tourGuides);
 
   const name = e.target.name.value;
   const duration = e.target.duration.value;
