@@ -45,7 +45,11 @@ const NavBar = () => {
               >
                 <img
                   className='nav-el__user-img'
-                  src={`http://localhost:5000/public/img/users/${currentUser.photo}`}
+                  src={
+                    currentUser.photo === 'default.jpg'
+                      ? 'default.jpg'
+                      : `http://localhost:5000/public/img/users/${currentUser.photo}`
+                  }
                   alt={`user ${currentUser.name}`}
                 />
                 <span>{currentUser.name.split(' ')[0]}</span>

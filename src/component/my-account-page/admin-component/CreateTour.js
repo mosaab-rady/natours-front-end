@@ -53,10 +53,13 @@ export default function CreateTour() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    createUpdateTour(e, 'create', guides);
+    createUpdateTour(e, 'create', null, guides);
   };
 
-  console.log(guides);
+  const changeText = () => {
+    document.getElementById('create-tour__btn').innerText = 'processing...';
+  };
+
   const userGuides = users.filter((user) => guides.includes(user._id));
   return (
     <form
@@ -350,7 +353,13 @@ export default function CreateTour() {
           />
         </div>
       </div>
-      <button className='create-tour__btn'>create tour</button>
+      <button
+        className='create-tour__btn'
+        id='create-tour__btn'
+        onClick={changeText}
+      >
+        create tour
+      </button>
     </form>
   );
 }
