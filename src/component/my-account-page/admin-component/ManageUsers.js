@@ -61,7 +61,8 @@ export default function ManageUsers() {
               <div className='users-container___user' key={i}>
                 <div className='user-container__user__header'>
                   <img
-                    className='signup__photo'
+                    // className='signup__photo'
+                    className='user-container__user__header__img'
                     src={`http://localhost:5000/public/img/users/${user.photo}`}
                     alt={user.name.split(' ')[0]}
                   />
@@ -81,21 +82,23 @@ export default function ManageUsers() {
                   onSubmit={handleUpdateUser(user._id)}
                 >
                   <label>make {user.name.split(' ')[0]}</label>
-                  <div className='update-role__radio-group'>
-                    <input type='radio' value='user' name='role' required />
-                    <label>normal user</label>
-                  </div>
-                  <div className='update-role__radio-group'>
-                    <input type='radio' value='guide' name='role' />
-                    <label>guide</label>
-                  </div>
-                  <div className='update-role__radio-group'>
-                    <input type='radio' value='lead-guide' name='role' />
-                    <label>lead-guide</label>
-                  </div>
-                  <div className='update-role__radio-group'>
-                    <input type='radio' value='admin' name='role' />
-                    <label>admin</label>
+                  <div className='update-user__form__options'>
+                    <div className='update-role__radio-group'>
+                      <input type='radio' value='user' name='role' required />
+                      <label>normal user</label>
+                    </div>
+                    <div className='update-role__radio-group'>
+                      <input type='radio' value='guide' name='role' />
+                      <label>guide</label>
+                    </div>
+                    <div className='update-role__radio-group'>
+                      <input type='radio' value='lead-guide' name='role' />
+                      <label>lead-guide</label>
+                    </div>
+                    <div className='update-role__radio-group'>
+                      <input type='radio' value='admin' name='role' />
+                      <label>admin</label>
+                    </div>
                   </div>
                   <div className='manage-users__btns'>
                     <button className='update-user__btn'>update</button>

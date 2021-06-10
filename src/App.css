@@ -18,7 +18,7 @@ button {
   align-items: center;
   letter-spacing: 0.08rem;
   transition: all 0.3s linear;
-  background-color: rgb(245, 253, 242);
+  background-color: rgb(255, 255, 255);
 }
 
 @media screen and (max-width: 400px) {
@@ -173,7 +173,7 @@ button {
 .tours_container {
   padding: 5rem 4rem;
   width: 100%;
-  background-color: #f7f7f7;
+  background-color: #ffffff;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   grid-template-rows: auto;
